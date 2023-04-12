@@ -1,9 +1,22 @@
 <template>
-  <section>
+  <section class="relative bg-fpOrange">
+    <section class="lg:absolute -top-16 right-1/2 lg:translate-x-1/2 lg:w-1/2 z-50">
+      <div class="container mx-auto flex justify-center items-center">
+        <div class="bg-fpOrange lg:rounded-3xl flex justify-between items-center py-4 lg:px-28 lg:py-6">
+          <p class="text-fpBlueDark lg:text-4xl font-bold me-10 whitespace-nowrap">{{ $t("consultation") }}</p>
+          <button
+            type="button"
+            class="text-white text-sm lg:text-lg whitespace-nowrap bg-fpBlueDark hover:bg-fpBlue transition-colors focus:ring-4 focus:ring-fpBlue font-bold rounded-lg px-4 lg:px-8 py-3 lg:py-4 ms-auto block focus:outline-none"
+          >
+            {{ $t("contact_now") }}
+          </button>
+        </div>
+      </div>
+    </section>
     <footer class="bg-header py-10 relative">
-      <img src="~/assets/images/global/logo_footer.png" alt="" class="absolute end-0 top-5 w-3/12" />
-      <div class="container mx-auto flex gap-x-10">
-        <div class="w-1/4">
+      <img src="~/assets/images/global/logo_footer.png" alt="" class="absolute end-0 top-5 w-3/12 hidden lg:block" />
+      <div class="container mx-auto flex flex-col lg:flex-row items-center gap-x-10">
+        <div class="lg:w-1/4">
           <div class="flex items-center gap-x-2">
             <div class="border-e-4 pe-2">
               <p class="text-white text-3xl font-bold">fingerprint</p>
@@ -15,7 +28,7 @@
           </div>
           <p class="text-white text-justify">{{ $t("description_site_2") }}</p>
         </div>
-        <div class="w-1/4 pt-7">
+        <div class="lg:w-1/4 pt-7 text-center lg:text-start">
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("our_services") }}</h2>
           <ul class="mt-4 space-y-2">
             <li>
@@ -44,7 +57,7 @@
             </li>
           </ul>
         </div>
-        <div class="w-1/4 pt-7">
+        <div class="lg:w-1/4 pt-7 text-center lg:text-start">
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("important_links") }}</h2>
           <ul class="mt-4 space-y-2">
             <li>
@@ -70,7 +83,7 @@
             </li>
           </ul>
         </div>
-        <div class="w-1/4 pt-7">
+        <div class="lg:w-1/4 pt-7 text-center lg:text-start relative">
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("contact") }}</h2>
           <a href="#" class="text-white text-md hover:text-fpOrange transition mt-4 block"><Icon class="text-xl text-inherit" name="ic-sharp-email" /> info@fingerprintm.com</a>
           <a href="#" class="text-white text-md hover:text-fpOrange transition mt-2 block"><Icon class="text-xl text-inherit" name="ic-baseline-phone-enabled" /> 01090844348</a>

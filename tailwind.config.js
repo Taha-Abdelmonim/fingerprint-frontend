@@ -19,7 +19,7 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         fpBlue: "#704abb",
-        fpBlueDark: "#3B2664",
+        fpBlueDark: "#3B359F",
         fpOrange: "#ffbc01",
         fpOrangeDark: "#ef9e00",
         fpRed: "#9e0080",
@@ -33,6 +33,9 @@ module.exports = {
       },
       boxShadow: {
         dev: "0 0 12px rgba(0, 0, 0, 0.3)",
+      },
+      screens: {
+        sm: {max: "767px"},
       },
     },
   },

@@ -1,6 +1,7 @@
 <template>
   <Html :lang="currentLocale">
-    <Body :dir="dir" class="dark:bg-gray-800">
+    <Body :dir="dir" class="">
+      <ButtonUp />
       <NuxtLayout>
         <!-- <NuxtLoadingIndicator /> -->
         <!-- <Loading /> -->
