@@ -35,7 +35,7 @@ module.exports = {
         dev: "0 0 12px rgba(0, 0, 0, 0.3)",
       },
       screens: {
-        sm: {max: "767px"},
+        sm: {max: "1024px"},
       },
     },
   },

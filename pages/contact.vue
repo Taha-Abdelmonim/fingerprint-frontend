@@ -34,24 +34,41 @@
             {{ $t("submit") }}
           </button>
           <div class="flex justify-between my-8">
-            <p class="text-2xl text-fpBlueDark font-bold">201090844348</p>
-            <p class="text-2xl text-fpBlueDark font-bold">info@fingerprintm.com</p>
+            <a href="tel: +201090844348" target="_blank" class="text-2xl text-fpBlueDark font-bold"
+              ><Icon class="text-xl text-inherit me-2" name="ic-baseline-phone-enabled" />201090844348</a
+            >
+            <a href="mailto:info@fingerprintm.com" target="_blank" class="text-2xl text-fpBlueDark font-bold"
+              ><Icon class="text-xl text-inherit me-2" name="ic-sharp-email" />info@fingerprintm.com</a
+            >
           </div>
           <ul class="flex items-center gap-x-3 mt-4">
             <li>
-              <a href="#"><Icon class="text-gray-800 hover:text-[#1877f2] transition hover:scale-110 text-4xl" name="uil-facebook" /></a>
+              <a href="https://www.facebook.com/fingerprintmedia1?mibextid=ZbWKwL" target="_blank"
+                ><Icon class="text-gray-800 hover:text-[#1877f2] transition hover:scale-110 text-4xl" name="uil-facebook"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-gray-800 hover:text-[#1da1f2] transition hover:scale-110 text-4xl" name="mdi-twitter-box" /></a>
+              <a href="#" target="_blank"><Icon class="text-gray-800 hover:text-[#1da1f2] transition hover:scale-110 text-4xl" name="mdi-twitter-box" /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-gray-800 hover:text-[#c13584] transition hover:scale-110 text-4xl" name="ri-instagram-fill" /></a>
+              <a href="https://instagram.com/fingerprint_media_1?igshid=ZDdkNTZiNTM=" target="_blank"
+                ><Icon class="text-gray-800 hover:text-[#c13584] transition hover:scale-110 text-4xl" name="ri-instagram-fill"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-gray-800 hover:text-[#0a66c2] transition hover:scale-110 text-4xl" name="mdi-linkedin" /></a>
+              <a href="https://www.linkedin.com/in/finger-print-2528361b1" target="_blank"
+                ><Icon class="text-gray-800 hover:text-[#0a66c2] transition hover:scale-110 text-4xl" name="mdi-linkedin"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-gray-800 hover:text-[#fffc00] transition hover:scale-110 text-4xl" name="uil-snapchat-square" /></a>
+              <a href="https://www.snapchat.com/add/fingerprintm" target="_blank"
+                ><Icon class="text-gray-800 hover:text-[#fffc00] transition hover:scale-110 text-4xl" name="uil-snapchat-square"
+              /></a>
+            </li>
+            <li>
+              <a href="http://wa.me/201090844348" target="_blank"
+                ><Icon class="text-gray-800 hover:text-[#4aae20] transition hover:scale-110 text-4xl" name="ri-whatsapp-fill"
+              /></a>
             </li>
           </ul>
         </div>

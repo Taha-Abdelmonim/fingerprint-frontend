@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-header sticky top-0 start-0 z-50">
+  <header class="bg-header sticky top-0 start-0 z-100">
     <span id="bar-scroll" class="absolute start-0 h-1 bg-fpOrange rounded-e-full"></span>
     <div class="container flex items-center mx-auto">
       <div class="w-full lg:w-1/6 flex justify-between items-center gap-x-2">
@@ -21,11 +21,11 @@
           </div>
           <ul class="flex flex-col lg:flex-row lg:items-center sm:divide-y sm:mt-6 sm:h-full">
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="active text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3 peer">{{ $t("home") }}</a>
+              <nuxt-link :to="localePath('/')" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3 peer">{{ $t("home") }}</nuxt-link>
               <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="ic-baseline-house" />
             </li>
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("about") }}</a>
+              <nuxt-link :to="localePath('/about')" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("about") }}</nuxt-link>
               <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="mdi-account-box-multiple-outline" />
             </li>
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
@@ -48,9 +48,10 @@
                     class="divide-y lg:absolute start-0 top-8 bg-white text-gray-800 px-2 py-2 lg:w-44 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
                   >
                     <li
+                      @click="hoverServices = !hoverServices"
                       class="relative py-2 sm:ps-6 sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
                     >
-                      <a href="#">تصميم وستضافة المواقع</a>
+                      <nuxt-link :to="localePath('/services/web')">تصميم وستضافة المواقع</nuxt-link>
                     </li>
                     <li
                       class="relative py-2 sm:ps-6 sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
@@ -97,23 +98,33 @@
               </a>
             </li>
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("our_business") }}</a>
-              <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="ic-outline-business" />
-            </li>
-            <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("reviews") }}</a>
+              <nuxt-link :to="{path: '/', hash: '#reviews'}" class="reviews text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("reviews") }}</nuxt-link>
               <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="ph-users-three-bold" />
             </li>
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("blog") }}</a>
+              <nuxt-link :to="localePath('/blogs')" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("blog") }}</nuxt-link>
               <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="bx-bxl-blogger" />
             </li>
             <li class="py-3 lg:py-0 flex lg:block items-center justify-between">
-              <a href="#" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("contact") }}</a>
+              <nuxt-link :to="localePath('/contact')" class="text-gray-700 lg:text-white font-medium lg:font-bold text-lg px-3">{{ $t("contact") }}</nuxt-link>
               <Icon class="text-3xl peer-[.active]:text-fpOrange lg:hidden" name="ph-envelope-open-fill" />
             </li>
           </ul>
-          <div class="border-t border-fpLightGray flex justify-center py-4 lg:hidden">
+          <div class="flex flex-col justify-center items-center gap-y-3 py-4 lg:hidden">
+            <nuxt-link
+              :to="localePath('/login')"
+              class="text-fpBlue bg-blue-400/20 hover:bg-blue-400/50 transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-2 ms-auto dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange block w-full text-center"
+            >
+              <Icon name="mdi-lock-open" class="text-inherit text-2xl -mt-1 me-1" />
+              {{ $t("login") }}
+            </nuxt-link>
+            <nuxt-link
+              :to="localePath('/register')"
+              class="text-fpBlue bg-blue-400/20 hover:bg-blue-400/50 transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 ms-auto dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange block w-full text-center"
+            >
+              <Icon name="mdi-account-plus" class="text-inherit text-2xl -mt-1 me-1" />
+              {{ $t("create_new_account") }}
+            </nuxt-link>
             <button
               @click.stop="changelocal()"
               type="button"
@@ -210,6 +221,9 @@ const toggleDarkmode = () => {
 .menu-down-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+.z-100 {
+  z-index: 100;
 }
 @media (min-width: 1024px) {
   .lg\:hidden {

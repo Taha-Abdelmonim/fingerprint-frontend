@@ -32,28 +32,28 @@
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("our_services") }}</h2>
           <ul class="mt-4 space-y-2">
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_social") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_social") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_web") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_web") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_video") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_video") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_video_motion") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_video_motion") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_design_photos") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_design_photos") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_seo") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_seo") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("service_ads") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_ads") }}</span>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("our_services") }}</a>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("our_services") }}</span>
             </li>
           </ul>
         </div>
@@ -61,51 +61,69 @@
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("important_links") }}</h2>
           <ul class="mt-4 space-y-2">
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("clintes") }}</a>
+              <nuxt-link :to="{path: '/', hash: '#clintes'}" class="text-white text-md hover:text-fpOrange transition">{{ $t("clintes") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("services") }}</a>
+              <nuxt-link :to="{path: '/', hash: '#services'}" class="text-white text-md hover:text-fpOrange transition">{{ $t("services") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("blog") }}</a>
+              <nuxt-link :to="localePath('/blogs')" class="text-white text-md hover:text-fpOrange transition">{{ $t("blog") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("about") }}</a>
+              <nuxt-link :to="localePath('/about')" class="text-white text-md hover:text-fpOrange transition">{{ $t("about") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("order") }}</a>
+              <nuxt-link :to="localePath('/contact')" class="text-white text-md hover:text-fpOrange transition">{{ $t("order") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("privacy_policy") }}</a>
+              <nuxt-link :to="localePath('/privacyPolicy')" class="text-white text-md hover:text-fpOrange transition">{{ $t("privacy_policy") }}</nuxt-link>
             </li>
             <li>
-              <a href="#" class="text-white text-md hover:text-fpOrange transition">{{ $t("Frequently_asked_questions") }}</a>
+              <nuxt-link :to="localePath('/CommonQuestions')" class="text-white text-md hover:text-fpOrange transition">{{ $t("Frequently_asked_questions") }}</nuxt-link>
             </li>
           </ul>
         </div>
         <div class="lg:w-1/4 pt-7 text-center lg:text-start relative">
           <h2 class="text-fpOrange text-4xl font-bold">{{ $t("contact") }}</h2>
-          <a href="#" class="text-white text-md hover:text-fpOrange transition mt-4 block"><Icon class="text-xl text-inherit" name="ic-sharp-email" /> info@fingerprintm.com</a>
-          <a href="#" class="text-white text-md hover:text-fpOrange transition mt-2 block"><Icon class="text-xl text-inherit" name="ic-baseline-phone-enabled" /> 01090844348</a>
-          <a href="#" class="text-white text-md hover:text-fpOrange transition mt-2 block"
+          <a href="mailto:info@fingerprintm.com" target="_blank" class="text-white text-md hover:text-fpOrange transition mt-4 block"
+            ><Icon class="text-xl text-inherit" name="ic-sharp-email" />info@fingerprintm.com</a
+          >
+          <a href="tel: +201090844348" target="_blank" class="text-white text-md hover:text-fpOrange transition mt-2 block"
+            ><Icon class="text-xl text-inherit" name="ic-baseline-phone-enabled" />201090844348</a
+          >
+          <a href="http://wa.me/201090844348" target="_blank" class="text-white text-md hover:text-fpOrange transition mt-2 block sm:hidden"
+            ><Icon class="text-xl text-inherit" name="ic-outline-admin-panel-settings" /> {{ $t("contact_manege") }}</a
+          >
+          <a href="http://wa.me/201090844348" target="_blank" class="text-white text-md hover:text-fpOrange transition mt-2 block lg:hidden"
             ><Icon class="text-xl text-inherit" name="ic-outline-admin-panel-settings" /> {{ $t("contact_manege") }}</a
           >
           <h3 class="text-fpOrange text-2xl font-bold mt-12">{{ $t("social_contact") }}</h3>
           <ul class="flex items-center gap-x-3 mt-4">
             <li>
-              <a href="#"><Icon class="text-white hover:text-[#1877f2] transition hover:scale-110 text-4xl" name="uil-facebook" /></a>
+              <a href="https://www.facebook.com/fingerprintmedia1?mibextid=ZbWKwL" target="_blank"
+                ><Icon class="text-white hover:text-[#1877f2] transition hover:scale-110 text-4xl" name="uil-facebook"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-white hover:text-[#1da1f2] transition hover:scale-110 text-4xl" name="mdi-twitter-box" /></a>
+              <a href="#" target="_blank"><Icon class="text-white hover:text-[#1da1f2] transition hover:scale-110 text-4xl" name="mdi-twitter-box" /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-white hover:text-[#c13584] transition hover:scale-110 text-4xl" name="ri-instagram-fill" /></a>
+              <a href="https://instagram.com/fingerprint_media_1?igshid=ZDdkNTZiNTM=" target="_blank"
+                ><Icon class="text-white hover:text-[#c13584] transition hover:scale-110 text-4xl" name="ri-instagram-fill"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-white hover:text-[#0a66c2] transition hover:scale-110 text-4xl" name="mdi-linkedin" /></a>
+              <a href="https://www.linkedin.com/in/finger-print-2528361b1" target="_blank"
+                ><Icon class="text-white hover:text-[#0a66c2] transition hover:scale-110 text-4xl" name="mdi-linkedin"
+              /></a>
             </li>
             <li>
-              <a href="#"><Icon class="text-white hover:text-[#fffc00] transition hover:scale-110 text-4xl" name="uil-snapchat-square" /></a>
+              <a href="https://www.snapchat.com/add/fingerprintm" target="_blank"
+                ><Icon class="text-white hover:text-[#fffc00] transition hover:scale-110 text-4xl" name="uil-snapchat-square"
+              /></a>
+            </li>
+            <li>
+              <a href="http://wa.me/201090844348" target="_blank"><Icon class="text-white hover:text-[#4aae20] transition hover:scale-110 text-4xl" name="ri-whatsapp-fill" /></a>
             </li>
           </ul>
         </div>
