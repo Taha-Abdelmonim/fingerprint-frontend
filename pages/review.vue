@@ -1,37 +1,45 @@
 <template>
-  <BreadCrumbs :classes="'bg-white dark:bg-gray-900 dark:text-fpLightBack'" :contents="[$t('contact')]" />
+  <BreadCrumbs :classes="'bg-white dark:bg-gray-900 dark:text-fpLightBack'" :contents="[$t('reviews')]" />
   <section class="bg-fpBlueDark/10 pt-10 pb-40">
     <div
       class="sm:py-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center items-center gap-x-10 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl p-0 lg:h-[70vh]"
     >
       <div class="lg:w-1/2 lg:ps-4 lg:ms-8 sm:px-4">
-        <h1 class="font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange">{{ $t("title_contact") }}</h1>
-        <p class="mt-4 text-center text-lg dark:text-gray-300">{{ $t("desc_contact") }}</p>
-        <form @submit.prevent="sendMessage" method="post" action @keydown="errors.clear($event.target.name)">
-          <div class="mb-6 mt-10">
-            <label for="success" class="block mb-2 text-sm lg:text-md font-medium text-gray-700 dark:text-gray-300">{{ $t("title_message") }}</label>
-            <input
-              type="text"
-              class="bg-gray-50 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-gray-300 outline outline-1 outline-gray-200 dark:outline-none dark:focus:border-gray-500 focus:border"
-              v-model="contact.title"
-              :placeholder="$t('title')"
-              :class="errors.has('title') ? 'is-invalid' : ''"
+        <h1 class="font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange">{{ $t("review") }}</h1>
+        <!-- <p class="mt-4 text-center text-lg dark:text-gray-300">{{ $t("desc_contact") }}</p> -->
+        <form class="mt-10" @submit.prevent="sendReview" method="post" action @keydown="errors.clear($event.target.name)">
+          <div class="mb-6">
+            <label for="section_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t("select_section") }}</label>
+            <select
+              name="section_id"
+              id="section_id"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              @change="review.section_id = $event.target.value"
+              :class="errors.has('section_id') ? 'is-invalid' : ''"
               required
-            />
-            <p v-if="errors.has('title')" class="mt-2 text-sm text-red-500">{{ errors.get("title") }}</p>
+            >
+              <option
+                v-for="section in sectionsStore.sections"
+                :key="section.id"
+                :selected="section.url == 'sections'"
+                :value="section.id"
+                v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"
+              ></option>
+            </select>
+            <p v-if="errors.has('section_id')" class="mt-2 text-sm text-red-500">{{ errors.get("section_id") }}</p>
           </div>
           <div class="mb-6">
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t("message_contact") }}</label>
+            <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t("write_review_here") }}</label>
             <textarea
-              id="message"
+              id="comment"
               rows="4"
               class="bg-gray-50 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:text-gray-300 outline outline-1 outline-gray-200 dark:outline-none dark:focus:border-gray-500 focus:border resize-none h-40"
-              :placeholder="$t('write_message')"
-              :class="errors.has('message') ? 'is-invalid' : ''"
-              v-model="contact.message"
+              :placeholder="$t('write_review_here')"
+              :class="errors.has('comment') ? 'is-invalid' : ''"
+              v-model="review.comment"
               required
             ></textarea>
-            <p v-if="errors.has('message')" class="mt-2 text-sm text-red-500">{{ errors.get("message") }}</p>
+            <p v-if="errors.has('comment')" class="mt-2 text-sm text-red-500">{{ errors.get("comment") }}</p>
           </div>
           <button
             type="submit"
@@ -86,45 +94,47 @@
       </div>
     </div>
   </section>
+  <section id="reviews" class="pt-40">
+    <div class="container mx-auto pb-40">
+      <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("reviews") }}</h2>
+      <HomeReviews />
+    </div>
+  </section>
 </template>
 <script setup>
 import {useAuthStore} from "@/store/AuthStore";
 import {useTostStore} from "@/store/TostStore";
+import {useSectionStore} from "@/store/SectionStore";
 const auth = useAuthStore();
 const tost = useTostStore();
+const sectionsStore = useSectionStore();
 const apiUrl = useRuntimeConfig().public.apiURL;
 const errors = reactive(useErrors());
 const {currentLocale, dir} = useLang();
 const {t} = useI18n();
 useHead({
-  title: t("login"),
+  title: t("reviews"),
 });
 
-let contact = reactive({
-  title: "",
-  message: "",
+sectionsStore.getSections();
+let review = reactive({
+  comment: "",
+  section_id: "1",
 });
-const sendMessage = async () => {
-  /* if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user") == null) {
-    navigateTo("/login");
-    tost.add({
-      type: "error",
-      message: "يجب تسجيل الدخول اولا",
-    });
-  } */
+const sendReview = async () => {
   try {
-    await useAsyncData("sendMessage", () =>
-      $fetch(`${apiUrl}/sendMessage`, {
+    await useAsyncData("sendReview", () =>
+      $fetch(`${apiUrl}/sendReview`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("user")}`,
         },
-        body: {locale: currentLocale.value, ...contact},
+        body: {locale: currentLocale.value, ...review},
       }).then(res => {
         if (res.status) {
           tost.add({
             type: "success",
-            message: currentLocale.value == "ar" ? `تم ارسال رسالتك الي المسؤولين` : `success send your message`,
+            message: currentLocale.value == "ar" ? `تم ارسال تقييمك الي المسؤولين` : `success send your review`,
           });
           navigateTo("/");
         } else {
@@ -139,11 +149,11 @@ const sendMessage = async () => {
             }
             errors.record(ob);
           } else if (res.errCode == 0) {
-            navigateTo("/login");
             tost.add({
               type: "error",
               message: res.message,
             });
+            navigateTo("/login");
           }
         }
       })

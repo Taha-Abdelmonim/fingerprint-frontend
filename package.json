@@ -19,6 +19,9 @@
     "tailwindcss-rtl": "^0.9.0"
   },
   "dependencies": {
-    "@splidejs/vue-splide": "^0.6.12"
+    "@pinia/nuxt": "^0.4.8",
+    "@splidejs/vue-splide": "^0.6.12",
+    "pinia": "^2.0.34",
+    "vscode-languageserver": "^8.1.0"
   }
 }

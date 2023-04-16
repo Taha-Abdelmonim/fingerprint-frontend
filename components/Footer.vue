@@ -1,8 +1,8 @@
 <template>
-  <section class="relative bg-fpOrange">
+  <section class="relative bg-fpOrange dark:bg-gray-800">
     <section class="lg:absolute -top-16 right-1/2 lg:translate-x-1/2 lg:w-1/2 z-50">
       <div class="container mx-auto flex justify-center items-center">
-        <div class="bg-fpOrange lg:rounded-3xl flex justify-between items-center py-4 lg:px-28 lg:py-6">
+        <div class="bg-fpOrange dark:bg-gray-900 lg:rounded-3xl flex justify-between items-center py-4 lg:px-28 lg:py-6">
           <p class="text-fpBlueDark lg:text-4xl font-bold me-10 whitespace-nowrap">{{ $t("consultation") }}</p>
           <button
             type="button"
@@ -41,7 +41,7 @@
               <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_video") }}</span>
             </li>
             <li>
-              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_video_motion") }}</span>
+              <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_motion") }}</span>
             </li>
             <li>
               <span class="cursor-default text-white text-md hover:text-fpOrange transition">{{ $t("service_design_photos") }}</span>

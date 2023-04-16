@@ -1,21 +1,30 @@
 <template>
-  <Splide :options="options" class="container mx-auto review-slider">
-    <SplideSlide class="">
-      <div class="shadow-xl py-8 rounded-lg md:mx-4 sm:mx-1 bg-gray-100 flex flex-col h-full">
-        <div>
-          <img src="~/assets/images/global/avatar.jpg" alt="" class="w-20 h-20 rounded-full block mx-auto object-cover" />
+  <ClientOnly>
+    <Splide :options="options" class="container mx-auto review-slider">
+      <SplideSlide class="">
+        <div class="shadow-xl py-8 rounded-lg md:mx-4 sm:mx-1 bg-gray-100 dark:bg-gray-800 flex flex-col h-full">
+          <div>
+            <img src="~/assets/images/global/avatar.jpg" alt="" class="w-20 h-20 rounded-full block mx-auto object-cover" />
+          </div>
+          <div class="px-6 h-full">
+            <h2 class="text-lg font-bold mt-6 block hover:text-main_color_hover_2 text-center dark:text-fpOrange">{{ $t("my_name") }}</h2>
+            <span class="block text-gray-600 dark:text-gray-300 mt-2 mb-4">{{ $t("lorem") }} </span>
+          </div>
+          <div class="flex items-center justify-between mt-8 px-4 dark:text-fpLightBack">
+            <p class="font-medium text-xl text-main_color_2 mr-2">اسم القسم</p>
+            <p class="font-medium text-xl text-main_color_2 mr-2">اخطاء شائعة</p>
+          </div>
         </div>
-        <div class="px-6 h-full">
-          <h2 class="text-lg font-bold mt-6 block hover:text-main_color_hover_2 text-center">{{ $t("my_name") }}</h2>
-          <span class="block text-gray-600 mt-2 mb-4">{{ $t("lorem") }} </span>
-        </div>
-        <div class="flex items-center justify-between mt-8 px-4">
-          <p class="font-medium text-xl text-main_color_2 mr-2">اسم القسم</p>
-          <p class="font-medium text-xl text-main_color_2 mr-2">اخطاء شائعة</p>
-        </div>
-      </div>
-    </SplideSlide>
-  </Splide>
+      </SplideSlide>
+    </Splide>
+    <nuxt-link
+      :to="localePath('/review')"
+      class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-4 py-2.5 block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange w-fit mx-auto mt-10"
+    >
+      <Icon name="ic-outline-mode-edit-outline" class="text-3xl -mt-2" />
+      {{ $t("write_review") }}
+    </nuxt-link>
+  </ClientOnly>
 </template>
 <style>
 .review-slider .splide__arrow--next svg,

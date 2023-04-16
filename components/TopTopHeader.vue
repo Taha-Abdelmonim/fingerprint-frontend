@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-fpBlue py-3">
+  <section class="bg-fpBlue dark:bg-gray-700 py-3">
     <div class="container justify-center flex mx-auto">
       <div class="w-1/3 hidden lg:flex items-center gap-x-2">
         <Icon class="text-fpOrange text-3xl" :name="locale == 'ar' ? 'ic-baseline-phone-enabled' : 'ic-baseline-local-phone'" />
@@ -37,34 +37,48 @@
           </li>
         </ul>
       </div>
-      <div class="w-1/3 hidden lg:flex items-center">
+      <div class="w-1/3 hidden lg:flex items-center justify-end gap-x-2">
         <nuxt-link
           :to="localePath('/login')"
-          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 ms-auto block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
+          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
+          v-if="!auth.isLoggedIn"
         >
           <Icon name="mdi-lock-open" class="text-white text-2xl -mt-1 me-1" />
           {{ $t("login") }}
         </nuxt-link>
         <nuxt-link
           :to="localePath('/register')"
-          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 ms-auto block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
+          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
+          v-if="!auth.isLoggedIn"
         >
           <Icon name="mdi-account-plus" class="text-white text-2xl -mt-1 me-1" />
           {{ $t("create_new_account") }}
         </nuxt-link>
+
         <nuxt-link
           :to="localePath('/contact')"
-          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 ms-auto block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
+          class="text-white bg-fpOrange hover:bg-fpOrangeDark transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg px-2 py-1.5 block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
         >
           {{ $t("order") }}
         </nuxt-link>
+      </div>
+      <div class="w-1/3 lg:hidden flex justify-end">
+        <button @click.stop="toggleDarkmode()" class="bg-gray-100 dark:bg-gray-700 rounded-full p-1">
+          <Icon class="text-3xl text-fpOrange" name="ph-moon-fill" v-if="mode == 'dark'" />
+          <Icon id="toggleMode" class="text-3xl text-fpOrange" name="ph-sun-fill" v-if="mode != 'dark'" />
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import {useAuthStore} from "@/store/AuthStore";
+const auth = useAuthStore();
 const {locale, setLocale} = useI18n();
+let hoverNotification = ref(false);
+let mode = ref("light");
+// v-if="!auth.isLoggedIn"
 </script>
 
 <style></style>

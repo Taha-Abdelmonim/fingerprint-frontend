@@ -4,52 +4,67 @@
     <!--  | &ThinSpace; <Icon name="mingcute-share-2-line" class="text-3xl" /> مشاركة -->
     <div class="container mx-auto flex gap-x-20 sm:flex-col-reverse sm:items-center mt-20">
       <div class="md:w-3/4 space-y-20">
-        <div>
+        <!-- start -->
+        <div v-for="post in posts" :key="post.id">
           <div class="w-full mb-8 relative">
-            <NuxtLink :to="`/blog/web`">
-              <img src="~/assets/images/global/bg-any.png" alt="" class="w-full md:h-[400px]" />
+            <NuxtLink :to="localePath(`/blog/${post.slug}`)">
+              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full md:h-[400px]" />
             </NuxtLink>
             <span
               class="absolute sm:top-[-3rem] md:top-[-2rem] start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg rounded-md sm:w-28 sm:h-12 sm:right-12"
-              >2022-10-01
+              v-text="getDate(post.created_at)"
+            >
             </span>
           </div>
 
           <div class="text-gray-400 text-lg md:text-xl mb-8">
-            <img src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" /> طه عبدالمنعم &ThinSpace; | &ThinSpace;
-            <Icon name="uil-comment-dots" class="text-3xl" /> <span>{{ $t("comments") }} (25)</span> &ThinSpace;
+            <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="w-10 h-10 rounded-full inline" />
+            <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" />
+            {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
+            <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
           </div>
-          <NuxtLink :to="`/blogs`" class="font-bold text-fpOrange text-xl md:text-4xl sm:my-4 md:mb-6 block hover:text-white transition"> ازاي تبدا مشروعك </NuxtLink>
-          <p class="text-gray-600 w-5/6">
-            {{ $t("lorem") }}
-          </p>
-          <button
-            class="button-arrow-evect leading-none relative bg-fpOrange hover:bg-fpOrangeDark transition py-1 px-4 text-base font-normal text-white rounded-md whitespace-nowrap flex items-center mt-10"
+          <NuxtLink
+            :to="localePath(`/blog/${post.slug}`)"
+            class="font-bold text-fpOrange hover:text-fpRed text-xl md:text-4xl sm:my-4 md:mb-6 block hover:dark:text-white transition"
+            v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"
           >
-            <NuxtLink to="`/blogs`" class="ml-2 text-3xl">{{ $t("read_more") }}</NuxtLink>
-            <Icon name="ic-outline-arrow-back" class="text-3xl arrow-animate" />
-          </button>
+          </NuxtLink>
+          <p class="text-gray-600 dark:text-gray-300 w-5/6" v-text="currentLocale == 'ar' ? post.description_ar : post.description_en"></p>
+          <NuxtLink
+            :to="localePath(`/blog/${post.slug}`)"
+            class="arro-hover leading-none relative bg-fpOrange hover:bg-fpOrangeDark transition py-1 px-4 text-base font-normal text-white rounded-md whitespace-nowrap flex items-center mt-10 w-fit"
+          >
+            <Icon v-if="currentLocale == 'en'" name="ic-outline-arrow-back" class="text-3xl arrow-animate" />
+            <span class="ml-2 text-3xl">{{ $t("read_more") }}</span>
+            <Icon v-if="currentLocale == 'ar'" name="ic-outline-arrow-back" class="text-3xl arrow-animate" />
+          </NuxtLink>
         </div>
       </div>
       <div class="md:w-1/4 sm:mt-16 md:ml-auto">
         <div class="relative">
           <div class="relative h-fit">
             <input
+              @input="e => searchPosts(e.target.value)"
               id="posts-search"
               type="text"
               :placeholder="$t('search')"
-              class="focus:outline-none bg-gray-200 focus:bg-gray-100 rounded-e-xl p-6 py-2 font-light text-xl w-full"
+              class="focus:outline-none bg-gray-200 dark:bg-gray-800 dark:text-fpLightBack focus:bg-gray-100 rounded-e-xl p-6 py-2 font-light text-xl w-full"
             />
             <Icon name="ic-baseline-search" class="absolute bg-fpOrange w-10 h-full end-0 top-0 grid place-items-center text-4xl text-white rounded-e-lg" />
           </div>
           <div
-            v-if="false"
+            v-if="resultSearch.length > 0"
             id="dropdown"
-            class="z-10 bg-white divide-y divide-gray-100 rounded w-full dark:bg-gray-700 absolute top-20 inset-x-0 shadow-lg max-h-[200px] overflow-y-auto"
+            class="z-10 bg-white divide-y divide-gray-100 rounded w-full dark:bg-gray-700 absolute top-10 inset-x-0 shadow-lg max-h-[200px] overflow-y-auto"
           >
             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 divide-y-2" aria-labelledby="dropdown-button">
-              <li>
-                <NuxtLink :to="`/blogs`" type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> اسم المقال </NuxtLink>
+              <li v-for="post in resultSearch">
+                <NuxtLink
+                  :to="localePath(`/blog/${post.slug}`)"
+                  type="button"
+                  class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"
+                ></NuxtLink>
               </li>
             </ul>
           </div>
@@ -64,8 +79,8 @@
         </div>
         <div class="mt-8 space-y-2">
           <div class="flex justify-between font-medium text-gray-600 text-lg">
-            <label for="`checkbox_1`">مواقع</label>
-            <input type="checkbox" id="`checkbox_1`" name="checkbox" value="1" class="w-6 h-6" />
+            <label for="`checkbox_1`" class="dark:text-gray-300 cursor-pointer">مواقع</label>
+            <input type="checkbox" id="`checkbox_1`" name="checkbox" value="1" class="w-6 h-6 dark:bg-gray-800 cursor-pointer dark:appearance-none" />
           </div>
         </div>
         <div class="mt-10">
@@ -120,4 +135,43 @@
     </div> -->
   </section>
 </template>
-<script setup></script>
+<script setup>
+const baseURL = useRuntimeConfig().public.baseURL;
+const {currentLocale, dir} = useLang();
+let posts = ref([]);
+let resultSearch = ref([]);
+const getPosts = async () => {
+  try {
+    await $fetch(`${useRuntimeConfig().public.apiURL}/getPosts`).then(res => {
+      posts.value = res.data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+getPosts();
+
+const searchPosts = async value => {
+  if (value == "") {
+    return (resultSearch.value = []);
+  }
+  try {
+    await $fetch(`${useRuntimeConfig().public.apiURL}/searchPosts`, {
+      method: "POST",
+      body: {locale: currentLocale.value, search: value},
+    }).then(res => {
+      resultSearch.value = res.data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+function getDate(date) {
+  var $created_at = new Date(date);
+  let year = $created_at.getFullYear();
+  let month = $created_at.getMonth() < 10 ? `0${$created_at.getMonth()}` : $created_at.getMonth();
+  let dey = $created_at.getDay() < 10 ? `0${$created_at.getDay()}` : $created_at.getDay();
+
+  return `${dey}-${month}-${year}`;
+}
+</script>

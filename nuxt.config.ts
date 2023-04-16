@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      // apiURL: 'https://backend.futureelife.com',
-      // baseURL: 'https://backend.futureelife.com/api',
+      apiURL: 'http://127.0.0.1:8000/api',
+      baseURL: 'http://127.0.0.1:8000',
     },
   },
-  modules: ['@nuxtjs/i18n', '@nuxtjs/tailwindcss', 'nuxt-icon'],
+  modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/tailwindcss', 'nuxt-icon'],
   css: ['@/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -14,17 +14,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   app: {
     head: {
       link: [
         // { rel: 'icon', href: '/img/logo/logo-icon.svg' },
-        // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        // { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'crossorigin' },
-        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap' },
-        // { rel: 'stylesheet', href: '/css/style-rtl.min.css' },
       ],
       script: [
-        { src: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js', body: true }
       ]
     },
   },

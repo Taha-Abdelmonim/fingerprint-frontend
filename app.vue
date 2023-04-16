@@ -1,9 +1,9 @@
 <template>
   <Html :lang="currentLocale">
-    <Body :dir="dir" class="">
+    <Body :dir="dir" class="dark:bg-gray-900">
       <ButtonUp />
+      <NuxtLoadingIndicator />
       <NuxtLayout>
-        <!-- <NuxtLoadingIndicator /> -->
         <!-- <Loading /> -->
         <NuxtPage />
       </NuxtLayout>

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="">
     <TopTopHeader />
     <Header />
     <slot />
     <Footer />
-    <!-- <NotificationContainer /> -->
+    <NotificationContainer />
   </div>
 </template>

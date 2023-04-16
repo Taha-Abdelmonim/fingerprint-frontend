@@ -8,15 +8,17 @@
   <section class="bg-fpBlueDark/10 pt-10 pb-40">
     <div class="container mx-auto">
       <div>
-        <h1 class="text-3xl lg:text-5xl text-fpBlueDark font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("fingerprint_company") }}</h1>
-        <p class="text-md lg:text-2xl font-medium" v-html="$t('about_desc_1')"></p>
-        <p class="text-md lg:text-2xl font-medium mt-6" v-html="$t('about_desc_2')"></p>
-        <p class="text-md lg:text-2xl font-medium mt-6" v-html="$t('about_desc_3')"></p>
+        <h1 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">
+          {{ $t("fingerprint_company") }}
+        </h1>
+        <p class="text-md lg:text-2xl font-medium dark:text-gray-300" v-html="$t('about_desc_1')"></p>
+        <p class="text-md lg:text-2xl font-medium mt-6 dark:text-gray-300" v-html="$t('about_desc_2')"></p>
+        <p class="text-md lg:text-2xl font-medium mt-6 dark:text-gray-300" v-html="$t('about_desc_3')"></p>
       </div>
       <div class="mt-20">
-        <h1 class="text-3xl lg:text-5xl text-fpBlueDark font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-10">{{ $t("about_fingerprint") }}</h1>
-        <p class="text-md lg:text-2xl font-medium" v-html="$t('desc_about_fingerprint')"></p>
-        <p class="text-md lg:text-2xl font-medium mt-10" v-html="$t('desc_about_fingerprint_2')"></p>
+        <h1 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-10">{{ $t("about_fingerprint") }}</h1>
+        <p class="text-md lg:text-2xl font-medium dark:text-gray-300" v-html="$t('desc_about_fingerprint')"></p>
+        <p class="text-md lg:text-2xl font-medium mt-10 dark:text-gray-300" v-html="$t('desc_about_fingerprint_2')"></p>
       </div>
     </div>
   </section>
