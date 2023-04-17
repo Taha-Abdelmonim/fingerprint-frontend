@@ -1,55 +1,61 @@
 <template>
   <section class="blog">
     <BreadCrumbs :classes="'bg-breadcrumb put h-[450px] overlay text-white text-3xl'" :contents="['المقالات', 'اسم المقال']" />
-    <section class="section-2 py-[100px] relative">
+    <section class="section-2 py-[100px] relative" v-if="Object.keys(post).length">
       <div class="container mx-auto">
         <div class="w-full sm:mt-20">
           <div class="">
             <div class="w-full mb-8 relative">
-              <img src="~/assets/images/global/bg-any.png" alt="" class="w-full" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full h-[400px]" />
               <span
                 class="absolute sm:top-[-3rem] lg:top-[-2rem] start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg rounded-md sm:w-28 sm:h-12 sm:right-12"
-                >2022-10-01
+                v-text="getDate(post.created_at)"
+              >
               </span>
             </div>
-            <div class="text-gray-400  text-lg lg:text-xl mb-8">
-              <img src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" /> طه عبدالمنعم &ThinSpace; | &ThinSpace;
-              <Icon name="uil-comment-dots" class="text-3xl" /> <span>{{ $t("comments") }} (25)</span> &ThinSpace;
+            <div class="text-gray-400 text-lg lg:text-xl mb-8">
+              <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="w-10 h-10 rounded-full inline" />
+              <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" />
+              {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
+              <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
             </div>
-            <h2 class="font-bold text-fpOrange text-xl lg:text-4xl sm:my-4 lg:mb-6">ازاي تبدا مشروعك</h2>
+            <h2 class="font-bold text-fpOrange text-xl lg:text-4xl sm:my-4 lg:mb-6" v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"></h2>
             <div class="dark:text-gray-300">
-              <p class="text-gray-600  font-medium text-md lg:text-xl "><h1 class="ql-direction-rtl ql-align-center"><strong><u>4 أخطاء شائعة وانتي بتبدأي مشروعك</u></strong></h1><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><strong>أي صاحب مشروع أو مدير مشروع دايما بيغلط من غير إستثناء، بس غلطة عن غلطة تفرق، و الغلطات دايما بتكون أفضل آداة للتنبيه لوجود مشكلة، وفي نفس الوقت هي أفضل معلم.</strong></p><p class="ql-direction-rtl ql-align-right"><strong>بس الشاطرة مننا هي اللي تتعلم من غلطاتها و تستغلها لصالحها، عشان كدا في المقالة ديه هنقولك أكتر الغلطات الشائعة و انتي بتبدأي مشروعك</strong></p><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><strong style="color: rgb(255, 255, 255);">1- اختيار الشخص الغلط لإدارة المشروع</strong></p><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><strong>لو انتي مش عارفة ازاي تديري المشروع، الخيار الصح هو إنك تخلي شخص عنده خبرة يدير المشروع، بس هنا ممكن تكون الغلطة الشائعة والمتكررة هي إنك تختاري شخص مش مناسب إنه يدير المشروع بتاعك، وده مش معناه إنه مش مؤهل إدارياً بس، هو ممكن يكون مش قادر إنه يفهم السوق ده خصوصا لو هو سوق مش منتشر أو سوق فيه منافسة كبيرة زي سوق الهاندميد.</strong></p><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><strong style="color: rgb(255, 255, 255);">2- ضعف التواصل</strong></p><p class="ql-direction-rtl ql-align-right"><strong>التواصل هو العامل الأهم في إدارة المشاريع الناجحة، عشان كدة التواصل الفعال هو مفتاح النجاح في أي مشروع هو ازاي تتواصلي مع عملائك، وازاي بتتواصلي مع زباينك، والتواصل الفعال بيلعب دور مهم في نجاح مشروعك و ده عن طريق إنه بيضمن التوافق بين كل أعضاء الفريق، ف لوانتي خايفة على مشروعك من الإنهيار والفشل، فلازم تحددي طريقة مناسبة للتواصل وتكون واضحة، وتتواصلي مع أعضاء فريقك بانتظام، بحيث إن ده هيساعد على إنك تتجنبي الشعور بالإرتباك، وكمان ممكن تتجنبي الخلافات والأخطاء اللي تخلي المشروع يفشل ويكون ملوش فايدة.</strong></p><p class="ql-direction-rtl ql-align-right"><br></p><p class="ql-direction-rtl ql-align-right"><br></p><h4 class="ql-direction-rtl ql-align-right"><strong>3- قلة وقت التخطيط</strong></h4><p class="ql-direction-rtl ql-align-right"><strong>تعرفي إن 4 من كل 5 مشاريع بتفشل فشل ذريع بسرعة؟!!</strong></p><p class="ql-direction-rtl ql-align-right"><strong>دي حاجة تقلق بالذات لو عندنا مشروع خاص أو هنبدأ مشروعنا، ويخلينا نسأل "ليه ده بيحصل؟" الحقيقة هو فيه أسباب كتير زي اللي لسا ذاكرينها فوق، بس السبب الأكبر و الأهم هو قلة وقت التخطيط، قلة وقت التخطيط والإستعجال هو واحد من أخطر الغلطات اللي من الممكن أنها تحصل للمشروع.</strong></p><p class="ql-direction-rtl ql-align-right"><strong>&nbsp;</strong></p><p class="ql-direction-rtl ql-align-right"><strong>واللي لو مقدرناش نعالجها بسرعة وبصورة صحيحة، ف ده هيودينا دايما لاتجاه فشل المشروع، حتى ممكن قبل ما يبدأ يجيب أي أرباح.</strong></p><p class="ql-direction-rtl ql-align-right"><strong>وممكن نحل المشكلة ديه عن طريق إننا ندي كل حاجة حقها سواء تخطيط أو حل المشاكل اللي بنواجهها.</strong></p><p class="ql-direction-rtl ql-align-right"><br></p><h4 class="ql-direction-rtl ql-align-right"><strong>4- تجاهل رضا العميل</strong></h4><p class="ql-direction-rtl ql-align-right"><strong>مستوى رضا العملاء الداخليين والخارجيين بيكون هو أهم مُحدد لنجاح أوفشل المشروع؛ بحيث أن رضا العميل هو مقياس النجاح الأساسي، عشان كدا لازم دايماً تحافظي على حماسة العملاء ناحية المشروع بتاعك عن طريق عمل اجتماعات منتظمة معاهم، و بالطريقة ديه تقدري إنك تحطي أي حاجة يعوزها عميلك في كل مرحلة من مراحل المشروع، وده اللي هيقلل من عدم رضا العملاء ويقربنا كتير من توقعات أغلب العملاء بتوعنا.</strong></p><p class="ql-direction-rtl ql-align-right"><strong>&nbsp;</strong></p><p class="ql-direction-rtl ql-align-right"><strong>كمان لازم تعرّفي العملاء كلهم على آخر مستجدات المشروع، وحتى لو كان فيه مشكلة في المشروع، لازم تبلغي عملائك بطريقة مباشرة، وده عشان ضمان الشفافية وتسهيل تغيير الخطة لو حصل أي مشاكل، وده عشان نقلل من تأثير حصول أي غلطات في أثناء المشروع.</strong></p><p><br></p></p>
+              <p class="text-gray-600 font-medium text-md lg:text-xl" v-html="currentLocale == 'ar' ? post.body_ar : post.body_en"></p>
             </div>
           </div>
-          <div class="mt-10">
-            <h5 class="mb-6 text-3xl dark:text-fpLightBack ">{{ $t("section") }}: <span class="text-3xl font-medium text-fpOrange">مواقع</span></h5>
+          <div class="mt-20">
+            <NuxtLink :to="localePath(`/${post.section.url}`)" class="mb-6 text-3xl dark:text-fpLightBack block">
+              <span class="text-3xl font-bold">{{ $t("section") }}</span
+              >: <span class="text-3xl font-medium text-fpOrange" v-text="currentLocale == 'ar' ? post.section.name_ar : post.name_en"></span>
+            </NuxtLink>
             <hr />
           </div>
           <div class="space-y-20">
-            <h6 class="mt-16 mb-10 text-2xl text-gray-700 dark:text-gray-300">{{ $t("comments") }} (25)</h6>
-            <div class="flex lg:items-center sm:flex-col sm:justify-center">
+            <h6 class="mt-16 mb-10 text-2xl text-gray-700 dark:text-gray-300">{{ $t("comments") }} ({{ post.comment.length }})</h6>
+            <div class="flex lg:items-center sm:flex-col sm:justify-center" v-for="comment in post.comment" :key="comment.id">
               <div class="lg:h-40 rounded-full sm:flex sm:h-fit items-center">
-                <!-- {{ comment.user_image }} -->
+                <!-- {{ comment }} -->
                 <img
+                  v-if="comment.user.photo"
+                  :src="`${baseURL}/images/${comment.user.photo}`"
+                  alt=""
+                  class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
+                />
+                <img
+                  v-else
                   src="https://www.pngmart.com/files/22/User-Avatar-Profile-PNG-Isolated-Transparent-Picture.png"
                   alt=""
                   class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
                 />
 
-                <!-- <img
-                  v-if="!Object.keys(comment.user_image).length == 0"
-                  :src="comment.user_image"
-                  alt=""
-                  class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
-                /> -->
-                <span class="sm:mr-6 text-gray-600 lg:block dark:text-gray-300">احمد علي</span> <span class="text-gray-400">2000-10-01</span>
+                <span class="sm:mr-6 text-gray-600 lg:block dark:text-gray-300" v-text="comment.user.name"></span>
+                <span class="text-gray-400" v-text="getDate(comment.created_at)"></span>
               </div>
               <div class="lg:ms-8 sm:text-center">
-                <p class="lg:w-5/6 text-gray-600 dark:text-gray-300 text-xl font-medium">
-                  {{ $t("lorem") }}
-                </p>
+                <p class="text-gray-600 dark:text-gray-300 text-xl font-medium" v-text="comment.comment"></p>
                 <a href="#replay" class="text-fpOrange mt-2 text-xl font-normal flex items-center sm:justify-center">
-                  رد
+                  {{ $t("reply") }}
                   <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                     <path
                       d="M3.75 13H16.25C21.7728 13 26.25 17.1787 26.25 22.3333V24.6667M3.75 13L11.25 20M3.75 13L11.25 6"
@@ -64,7 +70,7 @@
             </div>
           </div>
 
-          <form class="mt-24" id="replay">
+          <form class="mt-24" id="replay" @submit.prevent="commentPost" method="post" action @keydown="errors.clear($event.target.name)">
             <b class="font-medium text-3xl text-fpOrange">{{ $t("leave_response_post") }}</b>
             <div class="w-full mt-10 mb-6">
               <div class="relative">
@@ -73,10 +79,14 @@
                   id="message"
                   name="message"
                   class="w-full bg-gray-200 dark:bg-gray-800 dark:text-gray-300 bg-opacity-40 rounded focus:bg-[#e5e7eb99] h-52 text-base outline-none py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                  :placeholder="$t('write_comment_here')"
+                  :class="errors.has('comment') ? 'is-invalid' : ''"
+                  v-model="comment"
+                  required
                 ></textarea>
+                <p v-if="errors.has('comment')" class="mt-2 text-sm text-red-500">{{ errors.get("comment") }}</p>
               </div>
             </div>
-
             <button
               type="submit"
               class="mt-16 sm:mx-auto block text-2xl font-normal hover:border-fpOrange border-2 border-white rounded-md py-4 px-14 hover:text-fpOrange cursor-pointer bg-fpOrange text-white transition hover:bg-transparent"
@@ -88,6 +98,103 @@
       </div>
     </section>
 
-    <!-- <div class="sharethis-inline-share-buttons"></div> -->
+    <!-- <div class="sharethis-sticky-share-buttons"></div> -->
   </section>
 </template>
+<script setup>
+import {useTostStore} from "@/store/TostStore";
+const tost = useTostStore();
+const route = useRoute();
+const baseURL = useRuntimeConfig().public.baseURL;
+const {currentLocale, dir} = useLang();
+const errors = reactive(useErrors());
+let post = ref([]);
+useHead({
+  script: [
+    {
+      type: "text/javascript",
+      src: "https://platform-api.sharethis.com/js/sharethis.js#property=643d6dbd9806e4001a16ee2b&product=sticky-share-buttons&source=platform",
+      async: "async",
+    },
+  ],
+});
+const getPost = async () => {
+  try {
+    let read = "";
+    if (route.query.read == "true") {
+      read = "?read=true";
+    }
+
+    await $fetch(`${useRuntimeConfig().public.apiURL}/post/${route.params.slug}${read}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user")}`,
+      },
+    }).then(res => {
+      post.value = res.data;
+      useHead({
+        title: currentLocale.value == "ar" ? post.value.name_ar : post.value.name_en,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+if (process.client) {
+  getPost();
+}
+function getDate(date) {
+  var $created_at = new Date(date);
+  let year = $created_at.getFullYear();
+  let month = $created_at.getMonth() < 10 ? `0${$created_at.getMonth()}` : $created_at.getMonth();
+  let dey = $created_at.getDay() < 10 ? `0${$created_at.getDay()}` : $created_at.getDay();
+
+  return `${dey}-${month}-${year}`;
+}
+
+let comment = ref(null);
+const commentPost = async () => {
+  console.log(post.value.id);
+  try {
+    await useAsyncData("commentPost", () =>
+      $fetch(`${useRuntimeConfig().public.apiURL}/commentPost`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
+        body: {locale: currentLocale.value, comment: comment.value, post_id: post.value.id},
+      }).then(res => {
+        if (res.status) {
+          tost.add({
+            type: "success",
+            message: currentLocale.value == "ar" ? `تم ارسال تعليقك الي المسؤولين` : `success comment your review`,
+          });
+          comment.value = "";
+        } else {
+          if (res.errCode == 422) {
+            let ob = {};
+            for (const [key, value] of Object.entries(res.message)) {
+              ob[key] = value[0];
+              tost.add({
+                type: "error",
+                message: value[0],
+              });
+            }
+            errors.record(ob);
+          } else if (res.errCode == 0) {
+            tost.add({
+              type: "error",
+              message: res.message,
+            });
+            navigateTo("/login");
+          }
+        }
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+</script>

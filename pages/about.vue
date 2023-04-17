@@ -100,5 +100,6 @@ const {currentLocale, dir} = useLang();
 const {t} = useI18n();
 useHead({
   title: t("about"),
+  meta: [{name: "title", content: t("about")}],
 });
 </script>

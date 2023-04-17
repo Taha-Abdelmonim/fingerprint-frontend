@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-50 bottom-2 start-5">
+  <div class="fixed z-50 bottom-20 start-5">
     <TransitionGroup name="list">
       <NotificationTost v-for="(notification, index) in tost.notifications" :key="index" :notification="notification" />
     </TransitionGroup>

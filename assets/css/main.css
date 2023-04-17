@@ -65,11 +65,11 @@ nav a::after {
   @apply transition-all duration-200 end-0 bg-fpOrange;
 }
 nav > ul > li > a:hover::after,
-nav > ul > li > a.router-link-active:not(.reviews)::after {
+nav > ul > li > a.router-link-active::after {
   @apply start-0 transition-all duration-200 lg:w-full;
 }
 nav a:hover,
-nav a.router-link-active:not(.reviews) {
+nav a.router-link-active {
   @apply transition-all duration-200;
   color: #ffbc01 !important;
 }
@@ -113,4 +113,12 @@ nav a.router-link-active:not(.reviews) {
   .bg-hero {
     /* background-size: 100% !important; */
   }
+}
+[disabled],
+[disabled]:hover,
+.disabled {
+  background: #c0c2c5 !important;
+  border: none !important;
+  color: #374151 !important;
+  cursor: not-allowed !important;
 }

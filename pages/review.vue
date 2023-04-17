@@ -114,6 +114,7 @@ const {currentLocale, dir} = useLang();
 const {t} = useI18n();
 useHead({
   title: t("reviews"),
+  meta: [{name: "title", content: t("reviews")}],
 });
 
 sectionsStore.getSections();

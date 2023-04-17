@@ -97,7 +97,8 @@ const errors = reactive(useErrors());
 const {currentLocale, dir} = useLang();
 const {t} = useI18n();
 useHead({
-  title: t("login"),
+  title: t("contact"),
+  meta: [{name: "title", content: t("contact")}],
 });
 
 let contact = reactive({

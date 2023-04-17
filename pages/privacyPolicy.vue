@@ -2,7 +2,7 @@
   <section class="bg-fpBlueDark/10 privacy-policy">
     <BreadCrumbs :classes="'bg-breadcrumb h-28 lg:h-[500px] text-white'" :contents="['سياسة الخصوصية']" />
     <div class="container mx-auto bg-gray-100 dark:bg-gray-900 my-box-shadow pt-24 pb-40">
-      <h1 class="text-center text-4xl font-bold dark:text-fpOrange border-b-2 w-fit mx-auto">سياسة الخصوصية</h1>
+      <h1 class="text-center text-4xl font-bold dark:text-fpOrange border-b-2 w-fit mx-auto">{{ $t("privacy_policy") }}</h1>
       <h3 class="my-6 text-2xl dark:text-fpLightBack">تم آخر تحديث لسياسة الخصوصية هذه في 26 يناير 2023.</h3>
       <div class="space-y-5">
         <p class="leading-6 text-gray-700 dark:text-gray-300 text-md">
@@ -90,8 +90,10 @@
   </section>
 </template>
 <script setup>
+const {t} = useI18n();
 useHead({
-  title: "سياسة الخصوصية",
+  title: t("privacy_policy"),
+  meta: [{name: "title", content: t("privacy_policy")}],
 });
 </script>
 <style>

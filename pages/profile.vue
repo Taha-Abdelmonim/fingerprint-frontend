@@ -52,8 +52,10 @@
 <script setup>
 import {useAuthStore} from "@/store/AuthStore";
 const auth = useAuthStore();
+const {t} = useI18n();
 useHead({
-  title: "الملف الشخصي",
+  title: t("profile"),
+  meta: [{name: "title", content: t("profile")}],
 });
 function getDate(date) {
   var $created_at = new Date(date);

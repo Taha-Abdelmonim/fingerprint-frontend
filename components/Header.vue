@@ -17,7 +17,7 @@
       </div>
       <div v-if="toggleMenu" class="fixed inset-0 z-20 backdrop-blur-sm bg-black/[0.3] lg:hidden" @click="toggleMenu = !toggleMenu"></div>
       <Transition :name="locale == 'ar' ? 'slide-left' : 'slide-right'" v-show="toggleMenu">
-        <nav style="display: none" class="sm:fixed sm:bg-white dark:bg-gray-800 dark:text-fpLightBack inset-y-0 end-0 w-5/6 z-50 lg:w-3/6 px-4 sm:pt-4 sm:flex flex-col">
+        <nav class="sm:fixed sm:bg-white dark:bg-gray-800 dark:text-fpLightBack inset-y-0 end-0 w-5/6 z-50 lg:w-3/6 px-4 sm:pt-4 sm:flex flex-col">
           <div class="lg:hidden">
             <div class="flex items-center justify-between gap-x-2">
               <button type="button" class="outline-gray-100 outline rounded-md" @click="toggleMenu = !toggleMenu">
@@ -71,7 +71,7 @@
                       @click="hoverServices = false"
                       class="relative py-2 sm:ps-6 text-start sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
                     >
-                      <nuxt-link class="block" :to="localePath(`/${section.url}`)" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
+                      <nuxt-link :to="localePath(`/${section.url}`)" class="block" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
                     </li>
                   </ul>
                 </transition>
@@ -99,7 +99,7 @@
             </transition>
             <li class="py-3 lg:py-0">
               <nuxt-link
-                :to="{path: '/', hash: '#reviews'}"
+                :to="localePath('/review')"
                 class="reviews text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
                 >{{ $t("reviews") }}
                 <Icon class="text-3xl lg:hidden" name="ph-users-three-bold" />
@@ -175,7 +175,7 @@
           <div
             class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900"
           >
-            20
+            {{ notifications.length }}
           </div>
           <transition name="menu-down" v-show="hoverNotification">
             <div
@@ -184,35 +184,23 @@
             >
               <div class="flex items-center justify-between border-b border-b-fpLightGray dark:border-b-gray-700 pb-2 p-4">
                 <p class="text-gray-900 dark:text-gray-300 text-xl">{{ $t("notification") }}</p>
-                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">5 جديد</span>
+                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">{{ notifications.length }} {{ $t("new") }}</span>
               </div>
               <ul class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-                <li>
-                  <a href="#" class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2">
-                    <img src="~/assets/images/global/avatar.jpg" alt="" class="w-12 h-12 rounded-full object-cover" />
+                <li v-for="notification in notifications" :key="notification.id">
+                  <!-- ?read=true -->
+                  <nuxt-link
+                    :to="localePath({path: `/blog/${notification.data.post.slug}`, query: {read: true}})"
+                    class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2"
+                  >
+                    <img :src="`${baseURL}/images/${notification.data.post.photo}`" alt="" class="w-12 h-12 rounded-full object-cover" />
                     <span class="flex flex-col text-start ms-2">
-                      <span class="text-xl dark:text-fpLightBack">هنا اسم البوست</span>
-                      <span class="mt-1 dark:text-gray-300">هنا وصف قصير للبوست</span>
+                      <span class="text-xl dark:text-fpLightBack" v-text="locale == 'ar' ? notification.data.post.name_ar : notification.data.post.name_en"></span>
+                      <span class="mt-1 dark:text-gray-300"
+                        >{{ String(locale == "ar" ? notification.data.post.description_ar : notification.data.post.description_en).slice(0, 30) }}...</span
+                      >
                     </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2">
-                    <img src="~/assets/images/global/avatar.jpg" alt="" class="w-12 h-12 rounded-full object-cover" />
-                    <span class="flex flex-col text-start ms-2">
-                      <span class="text-xl dark:text-fpLightBack">هنا اسم البوست</span>
-                      <span class="mt-1 dark:text-gray-300">هنا وصف قصير للبوست</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2">
-                    <img src="~/assets/images/global/avatar.jpg" alt="" class="w-12 h-12 rounded-full object-cover" />
-                    <span class="flex flex-col text-start ms-2">
-                      <span class="text-xl dark:text-fpLightBack">هنا اسم البوست</span>
-                      <span class="mt-1 dark:text-gray-300">هنا وصف قصير للبوست</span>
-                    </span>
-                  </a>
+                  </nuxt-link>
                 </li>
               </ul>
             </div>
@@ -245,6 +233,7 @@ import {useSectionStore} from "@/store/SectionStore";
 const auth = useAuthStore();
 const tost = useTostStore();
 const sectionsStore = useSectionStore();
+const baseURL = useRuntimeConfig().public.baseURL;
 
 const {currentLocale, dir} = useLang();
 const {locale, setLocale} = useI18n();
@@ -280,13 +269,6 @@ const toggleDarkmode = () => {
     mode.value = "light";
   }
 };
-if (process.client) {
-  if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user")) {
-    getUserDetails();
-  } else {
-    auth.removeUser();
-  }
-}
 
 async function getUserDetails() {
   try {
@@ -318,6 +300,31 @@ async function logoutUser() {
     });
   } catch (err) {
     console.log(err);
+  }
+}
+let notifications = ref([]);
+const notificationsUser = async () => {
+  if (notifications.value.length == 0 && localStorage.getItem("user") != null) {
+    try {
+      await $fetch(`${useRuntimeConfig().public.apiURL}/notificationsUser`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
+      }).then(res => {
+        notifications.value = res.data;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+if (process.client) {
+  notificationsUser();
+  if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user")) {
+    getUserDetails();
   }
 }
 </script>

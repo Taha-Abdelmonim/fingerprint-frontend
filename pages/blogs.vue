@@ -5,7 +5,7 @@
     <div class="container mx-auto flex gap-x-20 sm:flex-col-reverse sm:items-center mt-20">
       <div class="md:w-3/4 space-y-20">
         <!-- start -->
-        <div v-for="post in posts" :key="post.id">
+        <div v-for="post in posts.data" :key="post.id">
           <div class="w-full mb-8 relative">
             <NuxtLink :to="localePath(`/blog/${post.slug}`)">
               <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full md:h-[400px]" />
@@ -78,9 +78,9 @@
           <hr />
         </div>
         <div class="mt-8 space-y-2">
-          <div class="flex justify-between font-medium text-gray-600 text-lg">
-            <label for="`checkbox_1`" class="dark:text-gray-300 cursor-pointer">مواقع</label>
-            <input type="checkbox" id="`checkbox_1`" name="checkbox" value="1" class="w-6 h-6 dark:bg-gray-800 cursor-pointer dark:appearance-none" />
+          <div class="flex justify-between font-medium text-gray-600 text-lg" v-for="section in sectionsStore.sections" :key="section.id">
+            <label :for="`checkbox_${section.id}`" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en" class="select-none"></label>
+            <input @change="filterPosts(section.id, $event)" class="fileter_checkbox w-6 h-6" type="checkbox" :id="`checkbox_${section.id}`" name="checkbox" :value="section.id" />
           </div>
         </div>
         <div class="mt-10">
@@ -91,53 +91,73 @@
           </h2>
           <hr />
         </div>
-        <div class="mt-16 sm:mb-20 space-y-10 overflow-y-scroll sm:max-h-[500px] md:max-h-[700px] w-full no-scroll sm:shadow-md md:shadow-lg">
-          <div class="flex items-center w-full">
-            <NuxtLink :to="`/blogs`" class="block me-4 w-[40%] h-full">
-              <img src="~/assets/images/global/bg-any.png" alt="" class="me-6 object-cover" />
+        <div class="pt-4 bg-gray-100 divide-y-2 overflow-y-scroll sm:max-h-[500px] md:max-h-[700px] w-full no-scroll sm:shadow-md md:shadow-lg">
+          <!-- mostWatchedPosts -->
+          <div class="flex items-center w-full p-2 py-4 hover:bg-gray-200 transition" v-for="post in mostWatchedPosts" :key="post.id">
+            <NuxtLink :to="localePath(`/blog/${post.slug}`)" class="block me-4 w-[40%] h-full">
+              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="me-6 object-cover" />
             </NuxtLink>
             <div class="w-[60%]">
-              <NuxtLink :to="`/blogs`" class="text-fpOrange text-xl md:text-xl font-bold block mb-1">اسم المقال</NuxtLink>
-              <Icon name="ic-outline-edit-calendar" class="text-gray-400 text-xl" /> <span class="text-fpOrange me-4">2022-10-01</span>
+              <NuxtLink
+                :to="localePath(`/blog/${post.slug}`)"
+                class="text-fpOrange text-xl md:text-xl font-bold block mb-1"
+                v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"
+              ></NuxtLink>
+              <Icon name="ic-outline-edit-calendar" class="text-gray-400 text-xl" /> <span class="text-fpOrange me-4" v-text="getDate(post.created_at)"></span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="mt-32">
-      <div class="flex container gap-x-6 ml-24">
-        <button
-          :disabled="posts.getPages.prev_page_url == null"
-          @click="posts.getApiPosts(0, posts.getPages.prev_page_url)"
-          type="button"
-          class="hover-button"
-          :class="[posts.getPages.prev_page_url == null ? 'disabled' : '']"
-        >
-          <Icon name="ic-round-arrow-forward-ios" class="text-2xl -mr-3" />
-        </button>
-        <button
-          v-for="i in Math.round(posts.getPages.total / posts.getPages.per_page)"
-          @click="posts.getApiPosts(0, `/?page=${i}`)"
-          :class="`hover-button font-medium text-2xl text-fpOrange ${posts.getPages.current_page == i ? 'active-button-page' : ''}`"
-        >
-          {{ i }}
-        </button>
-        <button
-          :disabled="posts.getPages.next_page_url == null"
-          @click="posts.getApiPosts(0, posts.getPages.next_page_url)"
-          type="button"
-          class="hover-button"
-          :class="[posts.getPages.next_page_url == null ? 'disabled' : '']"
-        >
-          <Icon name="ic-baseline-arrow-back-ios" class="text-2xl -mr-3" />
-        </button>
+    <div class="mt-32">
+      <div class="container ml-24 flex justify-between items-center">
+        <div class="flex items-center gap-x-6">
+          <button
+            :disabled="posts.prev_page_url == null"
+            type="button"
+            class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition rounded-lg px-4 py-3"
+            :class="[posts.prev_page_url == null ? 'disabled' : '']"
+            @click="getPostsPage(posts.prev_page_url)"
+          >
+            <Icon name="ic-round-arrow-forward-ios" class="text-4xl" />
+          </button>
+          <button
+            v-for="i in posts.last_page"
+            @click="getPostsPage(`http://127.0.0.1:8000/api/getPosts?page=${i}`)"
+            :class="`cursor-pointer transition rounded-lg px-4 py-3 text-2xl ${
+              posts.current_page == i ? 'bg-fpOrange text-white hover:text-white hover:bg-fpRed' : 'bg-gray-200 hover:bg-gray-300'
+            }`"
+          >
+            <span>{{ i }}</span>
+          </button>
+          <button
+            @click="getPostsPage(posts.next_page_url)"
+            :disabled="posts.next_page_url == null"
+            type="button"
+            class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition rounded-lg px-2 py-3"
+            :class="[posts.next_page_url == null ? 'disabled' : '']"
+          >
+            <Icon name="ic-baseline-arrow-back-ios" class="text-4xl me-3" />
+          </button>
+        </div>
+        <div class="flex items-center gap-x-6">
+          <p class="bg-gray-200 px-8 py-4 rounded-xl text-4xl text-gray-500">{{ posts.current_page }}/{{ posts.last_page }}</p>
+          <b class="text-3xl px-8 py-4 rounded-xl bg-gray-300 text-gray-500">{{ posts.total }}</b>
+        </div>
       </div>
-    </div> -->
+    </div>
   </section>
 </template>
 <script setup>
+import {useSectionStore} from "@/store/SectionStore";
+const sectionsStore = useSectionStore();
 const baseURL = useRuntimeConfig().public.baseURL;
 const {currentLocale, dir} = useLang();
+const {t} = useI18n();
+useHead({
+  title: t("blog"),
+  meta: [{name: "title", content: t("blog")}],
+});
 let posts = ref([]);
 let resultSearch = ref([]);
 const getPosts = async () => {
@@ -150,7 +170,16 @@ const getPosts = async () => {
   }
 };
 getPosts();
-
+const getPostsPage = async page => {
+  try {
+    await $fetch(page).then(res => {
+      posts.value = res.data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+sectionsStore.getSections();
 const searchPosts = async value => {
   if (value == "") {
     return (resultSearch.value = []);
@@ -174,4 +203,39 @@ function getDate(date) {
 
   return `${dey}-${month}-${year}`;
 }
+let sections_id = ref([]);
+async function filterPosts(id, event) {
+  try {
+    let all = "";
+    if (id == 1) {
+      all = true;
+    }
+    if (event.target.checked) {
+      sections_id.value.push(id);
+    } else {
+      sections_id.value = sections_id.value.filter(ele => ele != id);
+    }
+    await $fetch(`${useRuntimeConfig().public.apiURL}/filterPosts?sections_id=[${sections_id.value}]&all=${all}`, {
+      method: "GET",
+      // body: {locale: currentLocale.value, sections_id: sections_id.value, all},
+    }).then(res => {
+      posts.value = res.data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+let mostWatchedPosts = ref([]);
+async function mostWatched() {
+  try {
+    await $fetch(`${useRuntimeConfig().public.apiURL}/mostWatched`, {
+      method: "POST",
+    }).then(res => {
+      mostWatchedPosts.value = res.data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+mostWatched();
 </script>

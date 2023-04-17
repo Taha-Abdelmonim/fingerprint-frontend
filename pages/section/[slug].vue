@@ -1,5 +1,5 @@
 <template>
-  <BreadCrumbs :classes="'bg-breadcrumb dark:text-fpLightBack'" :contents="['الخدمات', $t(`service_${route.params.slug}`)]" />
+  <BreadCrumbs :classes="'bg-breadcrumb text-white dark:text-fpLightBack'" :contents="['الخدمات', $t(`service_${route.params.slug}`)]" />
   <section class="bg-fpBlueDark/10 pb-40">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-20">
@@ -40,7 +40,13 @@
 const route = useRoute();
 const baseURL = useRuntimeConfig().public.baseURL;
 const {currentLocale, dir} = useLang();
+const {t} = useI18n();
+useHead({
+  title: t(`service_${route.params.slug}`),
+  meta: [{name: "title", content: t(`service_${route.params.slug}`)}],
+});
 let projects = ref([]);
+
 const getSection = async () => {
   try {
     await $fetch(`${useRuntimeConfig().public.apiURL}/section/${route.params.slug}`).then(res => {

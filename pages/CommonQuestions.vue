@@ -51,8 +51,10 @@
   </section>
 </template>
 <script setup>
+const {t} = useI18n();
 useHead({
-  title: "اﻷسئلة الشائعة",
+  title: t("Frequently_asked_questions"),
+  meta: [{name: "title", content: t("Frequently_asked_questions")}],
 });
 let openqution_1 = ref(true);
 let openqution_2 = ref(false);

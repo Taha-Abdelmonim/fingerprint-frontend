@@ -126,7 +126,8 @@ const tost = useTostStore();
 const {t} = useI18n();
 let togglePassword = ref(false);
 useHead({
-  title: t("login"),
+  title: t("new_account"),
+  meta: [{name: "title", content: t("new_account")}],
 });
 let register = reactive({
   name: "",
