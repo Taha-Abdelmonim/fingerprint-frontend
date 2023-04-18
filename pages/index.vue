@@ -1,15 +1,18 @@
 <template>
   <div>
     <!-- {{ $nuxt.$route.name }} -->
-    <section class="py-8 lg:py-20 overlay relative hero-section">
+    <section class="py-8 h-[70vh] overlay relative hero-section">
       <ClientOnly>
         <div>
           <Splide :options="options_hero" aria-label="My Favorite Images test" class="absolute inset-0 visible">
             <SplideSlide>
-              <img src="~/assets/images/home/hero.png" alt="Sample 1" class="object-cover h-full w-full" />
+              <img :src="globalStore.appSettings.hero_image_1" alt="Sample 1" class="object-cover h-full w-full" />
             </SplideSlide>
             <SplideSlide>
-              <img src="~/assets/images/home/hero.png" alt="Sample 2" class="object-cover h-full w-full" />
+              <img :src="globalStore.appSettings.hero_image_2" alt="Sample 2" class="object-cover h-full w-full" />
+            </SplideSlide>
+            <SplideSlide>
+              <img :src="globalStore.appSettings.hero_image_3" alt="Sample 2" class="object-cover h-full w-full" />
             </SplideSlide>
           </Splide>
         </div>
@@ -155,6 +158,9 @@
   </div>
 </template>
 <script setup>
+import {useGlobalStore} from "@/store/GlobalStore";
+const globalStore = useGlobalStore();
+const baseURL = useRuntimeConfig().public.baseURL;
 const {t} = useI18n();
 useHead({
   title: t("home"),

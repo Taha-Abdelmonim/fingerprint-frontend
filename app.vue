@@ -40,7 +40,7 @@ useHead({
     {property: "twitter:description", content: t("meta_description")},
     {property: "twitter:type", content: "website"},
     {property: "twitter:image", content: `${baseURL}/images/bg-logo.png`},
-    {property: "twitter:site", content: t("fingerprintm1")},
+    {property: "twitter:site", content: "fingerprintm1"},
     {property: "twitter:site_name", content: t("fingerprint")},
     {property: "twitter:alt", content: t("fingerprint")},
   ],

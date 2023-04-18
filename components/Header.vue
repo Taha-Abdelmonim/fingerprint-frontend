@@ -230,9 +230,11 @@
 import {useAuthStore} from "@/store/AuthStore";
 import {useTostStore} from "@/store/TostStore";
 import {useSectionStore} from "@/store/SectionStore";
+import {useGlobalStore} from "@/store/GlobalStore";
 const auth = useAuthStore();
 const tost = useTostStore();
 const sectionsStore = useSectionStore();
+const globalStore = useGlobalStore();
 const baseURL = useRuntimeConfig().public.baseURL;
 
 const {currentLocale, dir} = useLang();
@@ -321,6 +323,18 @@ const notificationsUser = async () => {
     }
   }
 };
+const appSettings = async () => {
+  try {
+    await $fetch(`${useRuntimeConfig().public.apiURL}/app_settings`, {
+      method: "POST",
+    }).then(res => {
+      globalStore.setAppSettings(res.data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+appSettings();
 if (process.client) {
   notificationsUser();
   if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user")) {
