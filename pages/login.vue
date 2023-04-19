@@ -2,10 +2,10 @@
   <BreadCrumbs :classes="' dark:text-fpLightBack'" :contents="[$t('login')]" />
   <section class="bg-fpBlueDark/10 pt-10 pb-40">
     <div
-      class="sm:py-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center items-center gap-x-10 bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-xl p-0 lg:h-[70vh]"
+      class="sm:pb-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center lg:items-center gap-x-10 bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-xl p-0"
     >
       <div class="lg:w-1/2 lg:ps-4 lg:ms-28 sm:px-4">
-        <h1 class="font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange mb-10">{{ $t("welcome_back") }}</h1>
+        <h1 class="sm:mt-4 font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange mb-10">{{ $t("welcome_back") }}</h1>
         <form @submit.prevent="submitUserLogin" @keydown="errors.clear($event.target.name)" method="post">
           <div class="mb-6">
             <label for="success" class="block mb-2 text-sm lg:text-md font-medium text-gray-700 dark:text-gray-300">{{ $t("email_user") }}</label>
@@ -83,7 +83,7 @@
         </form>
       </div>
       <div class="lg:w-1/2 max-h-full">
-        <img src="~/assets/images/login_small.png" alt="Login" class="object-cover h-[70vh] ms-auto" />
+        <img src="~/assets/images/login_small.png" alt="Login" class="object-cover ms-auto" />
       </div>
     </div>
   </section>

@@ -2,10 +2,10 @@
   <BreadCrumbs :classes="'bg-white dark:bg-gray-900 dark:text-fpLightBack'" :contents="[$t('reviews')]" />
   <section class="bg-fpBlueDark/10 pt-10 pb-40">
     <div
-      class="sm:py-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center items-center gap-x-10 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl p-0 lg:h-[70vh]"
+      class="container mx-auto sm:pb-10 lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center lg:items-center gap-x-10 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl p-0"
     >
       <div class="lg:w-1/2 lg:ps-4 lg:ms-8 sm:px-4">
-        <h1 class="font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange">{{ $t("review") }}</h1>
+        <h1 class="sm:mt-20 font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange">{{ $t("review") }}</h1>
         <!-- <p class="mt-4 text-center text-lg dark:text-gray-300">{{ $t("desc_contact") }}</p> -->
         <form class="mt-10" @submit.prevent="sendReview" method="post" action @keydown="errors.clear($event.target.name)">
           <div class="mb-6">
@@ -47,11 +47,11 @@
           >
             {{ $t("submit") }}
           </button>
-          <div class="flex justify-between my-8">
+          <div class="flex flex-col lg:flex-row justify-between my-8">
             <a href="tel: +201090844348" target="_blank" class="text-2xl text-fpBlueDark dark:text-fpRed dark:hover:text-fpOrange font-bold"
               ><Icon class="text-xl text-inherit me-2" name="ic-baseline-phone-enabled" />201090844348</a
             >
-            <a href="mailto:info@fingerprintm.com" target="_blank" class="text-2xl text-fpBlueDark dark:text-fpRed dark:hover:text-fpOrange font-bold"
+            <a href="mailto:info@fingerprintm.com" target="_blank" class="sm:mt-2 text-2xl text-fpBlueDark dark:text-fpRed dark:hover:text-fpOrange font-bold"
               ><Icon class="text-xl text-inherit me-2" name="ic-sharp-email" />info@fingerprintm.com</a
             >
           </div>
@@ -90,12 +90,12 @@
         </form>
       </div>
       <div class="lg:w-1/2 max-h-full">
-        <img src="~/assets/images/login_small.png" alt="Login" class="object-cover h-[70vh] ms-auto" />
+        <img src="~/assets/images/login_small.png" alt="Login" class="object-cover ms-auto" />
       </div>
     </div>
   </section>
-  <section id="reviews" class="pt-40">
-    <div class="container mx-auto pb-40">
+  <section id="reviews" class="sm:py-20 lg:pt-40">
+    <div class="container mx-auto lg:pb-40">
       <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("reviews") }}</h2>
       <HomeReviews />
     </div>

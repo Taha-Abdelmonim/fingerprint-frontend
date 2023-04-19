@@ -1,21 +1,24 @@
 <template>
   <section class="blog">
-    <BreadCrumbs :classes="'bg-breadcrumb put h-[450px] overlay text-white text-3xl'" :contents="['المقالات', 'اسم المقال']" />
-    <section class="section-2 py-[100px] relative" v-if="Object.keys(post).length">
+    <BreadCrumbs
+      :classes="'bg-breadcrumb put h-[200px] lg:h-[450px] overlay text-white text-3xl blog-slug'"
+      :contents="[$t('blog'), currentLocale == 'ar' ? post.name_ar : post.name_en]"
+    />
+    <section class="section-2 lg:py-[100px] relative" v-if="Object.keys(post).length">
       <div class="container mx-auto">
         <div class="w-full sm:mt-20">
           <div class="">
             <div class="w-full mb-8 relative">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full h-[400px]" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full h-[200px] lg:h-[400px]" />
               <span
-                class="absolute sm:top-[-3rem] lg:top-[-2rem] start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg rounded-md sm:w-28 sm:h-12 sm:right-12"
+                class="absolute sm:top-[-3rem] lg:top-[-2rem] start-14 lg:start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg lg:rounded-md sm:w-28 sm:h-12 sm:right-12"
                 v-text="getDate(post.created_at)"
               >
               </span>
             </div>
             <div class="text-gray-400 text-lg lg:text-xl mb-8">
-              <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="w-10 h-10 rounded-full inline" />
-              <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" />
+              <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
+              <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
               {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
               <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
             </div>
@@ -26,13 +29,13 @@
           </div>
           <div class="mt-20">
             <NuxtLink :to="localePath(`/${post.section.url}`)" class="mb-6 text-3xl dark:text-fpLightBack block">
-              <span class="text-3xl font-bold">{{ $t("section") }}</span
-              >: <span class="text-3xl font-medium text-fpOrange" v-text="currentLocale == 'ar' ? post.section.name_ar : post.name_en"></span>
+              <span class="text-xl lg:text-3xl font-bold">{{ $t("section") }}</span
+              >: <span class="text-xl lg:text-3xl font-medium text-fpOrange" v-text="currentLocale == 'ar' ? post.section.name_ar : post.name_en"></span>
             </NuxtLink>
             <hr />
           </div>
           <div class="space-y-20">
-            <h6 class="mt-16 mb-10 text-2xl text-gray-700 dark:text-gray-300">{{ $t("comments") }} ({{ post.comment.length }})</h6>
+            <h6 class="mt-8 lg:mt-16 mb-10 text-2xl text-gray-700 dark:text-gray-300">{{ $t("comments") }} ({{ post.comment.length }})</h6>
             <div class="flex lg:items-center sm:flex-col sm:justify-center" v-for="comment in post.comment" :key="comment.id">
               <div class="lg:h-40 rounded-full sm:flex sm:h-fit items-center">
                 <!-- {{ comment }} -->
@@ -70,7 +73,7 @@
             </div>
           </div>
 
-          <form class="mt-24" id="replay" @submit.prevent="commentPost" method="post" action @keydown="errors.clear($event.target.name)">
+          <form class="sm:mb-16 mt-10 lg:mt-24" id="replay" @submit.prevent="commentPost" method="post" action @keydown="errors.clear($event.target.name)">
             <b class="font-medium text-3xl text-fpOrange">{{ $t("leave_response_post") }}</b>
             <div class="w-full mt-10 mb-6">
               <div class="relative">
@@ -89,7 +92,7 @@
             </div>
             <button
               type="submit"
-              class="mt-16 sm:mx-auto block text-2xl font-normal hover:border-fpOrange border-2 border-white rounded-md py-4 px-14 hover:text-fpOrange cursor-pointer bg-fpOrange text-white transition hover:bg-transparent"
+              class="mt-8 lg:mt-16 sm:mx-auto block text-xl lg:text-2xl font-normal hover:border-fpOrange border-2 border-white rounded-md py-2 px-4 lg:py-4 lg:px-14 hover:text-fpOrange cursor-pointer bg-fpOrange text-white transition hover:bg-transparent"
             >
               {{ $t("add_comment") }}
             </button>
@@ -198,3 +201,8 @@ const commentPost = async () => {
   }
 };
 </script>
+<style>
+.blog-slug .bread-crumbs {
+  @apply sm:text-[27px] sm:flex-col;
+}
+</style>

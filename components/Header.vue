@@ -3,14 +3,16 @@
     <a
       href="http://wa.me/201090844348"
       target="_blank"
-      class="sm:hidden rounded-full p-2 fixed justify-center items-center end-8 bottom-4 lg:bottom-8 z-51 transition-all duration-300 border-none flex"
+      class="sm:hidden rounded-full p-2 fixed justify-center items-center end-8 bottom-4 z-51 transition-all duration-300 border-none flex"
     >
       <img src="~/assets/images/global/whatsapp.png" alt="" class="w-16" />
     </a>
     <span id="bar-scroll" class="absolute start-0 h-1 bg-fpOrange rounded-e-full"></span>
     <div class="container flex items-center mx-auto">
       <div class="w-full lg:w-1/6 flex justify-between items-center gap-x-2">
-        <img src="~/assets/images/global/logo-transparent.png" alt="" class="w-16 lg:w-20" />
+        <nuxt-link :to="localePath('/')">
+          <img src="~/assets/images/global/logo-transparent.png" alt="" class="w-16 lg:w-20" />
+        </nuxt-link>
         <button type="button" class="outline-gray-300 block lg:hidden" @click="toggleMenu = !toggleMenu">
           <Icon class="text-white text-4xl font-bold" :name="locale == 'ar' ? 'heroicons-bars-3-bottom-left-20-solid' : 'heroicons-bars-3-bottom-right'" />
         </button>
@@ -61,24 +63,26 @@
                   <Icon class="text-3xl lg:hidden" name="ic-baseline-important-devices" />
                 </span>
                 <transition name="menu-down" v-show="hoverServices">
-                  <ul
+                  <div
                     style="display: none"
-                    class="divide-y dark:divide-gray-700 lg:absolute start-0 top-8 bg-white dark:text-gray-300 dark:bg-gray-800 text-gray-800 px-2 py-2 lg:w-52 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
+                    class="lg:absolute start-0 top-8 bg-white dark:text-gray-300 dark:bg-gray-800 text-gray-800 px-2 py-2 lg:w-52 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
                   >
-                    <li
-                      v-for="section in sectionsStore.sectionsActive"
-                      :key="section.id"
-                      @click="hoverServices = false"
-                      class="relative py-2 sm:ps-6 text-start sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
-                    >
-                      <nuxt-link :to="localePath(`/${section.url}`)" class="block" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
-                    </li>
-                  </ul>
+                    <ul class="divide-y dark:divide-gray-700">
+                      <li
+                        v-for="section in sectionsStore.sectionsActive"
+                        :key="section.id"
+                        @click="hoverServices = false"
+                        class="relative py-3 sm:ps-6 text-start sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
+                      >
+                        <nuxt-link :to="localePath(`/${section.url}`)" class="block w-full h-full" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
+                      </li>
+                    </ul>
+                  </div>
                 </transition>
               </button>
             </li>
             <!-- mobile -->
-            <li class="py-3 lg:py-0 flex lg:hidden items-center justify-between" @click="hoverServices = !hoverServices">
+            <li @click="hoverServices = !hoverServices" class="py-3 lg:py-0 flex lg:hidden items-center justify-between">
               <span>
                 {{ $t("services") }}
                 <Icon name="zondicons-cheveron-down" class="text-2xl transition-all duration-300" :class="hoverServices ? 'rotate-180' : ''" />
@@ -90,10 +94,12 @@
                 class="divide-y dark:divide-gray-700 lg:hidden lg:absolute start-0 top-8 bg-white dark:text-gray-300 dark:bg-gray-800 text-gray-800 px-2 py-2 lg:w-44 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
               >
                 <li
+                  v-for="section in sectionsStore.sectionsActive"
+                  :key="section.id"
                   @click="hoverServices = !hoverServices"
-                  class="relative py-2 sm:ps-6 sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
+                  class="relative py-3 sm:ps-10 sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-4 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
                 >
-                  <!-- <nuxt-link :to="localePath('/services/web')">تصميم وستضافة المواقع</nuxt-link> -->
+                  <nuxt-link :to="localePath(`/${section.url}`)" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
                 </li>
               </ul>
             </transition>
@@ -109,6 +115,7 @@
               <nuxt-link
                 :to="localePath('/blogs')"
                 class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                :class="route.name.slice(0, 4) == 'blog' ? 'router-link-active' : ''"
               >
                 {{ $t("blog") }}
                 <Icon class="text-3xl lg:hidden" name="bx-bxl-blogger" />
@@ -126,6 +133,7 @@
           </ul>
           <div class="flex flex-col justify-center items-center gap-y-3 py-4 lg:hidden">
             <nuxt-link
+              v-if="!auth.isLoggedIn"
               :to="localePath('/login')"
               class="text-fpBlue dark:text-fpLightBack bg-blue-400/20 hover:bg-blue-400/50 transition-colors focus:ring-4 font-bold rounded-lg text-lg px-2 py-2 ms-auto focus:outline-none block w-full text-center"
             >
@@ -133,6 +141,7 @@
               {{ $t("login") }}
             </nuxt-link>
             <nuxt-link
+              v-if="!auth.isLoggedIn"
               :to="localePath('/register')"
               class="text-fpBlue dark:text-fpLightBack bg-blue-400/20 hover:bg-blue-400/50 transition-colors focus:ring-4 font-bold rounded-lg text-lg px-2 py-1.5 ms-auto focus:outline-none block w-full text-center"
             >
@@ -147,6 +156,36 @@
               <Icon :name="locale == 'ar' ? 'openmoji-flag-us-outlying-islands' : 'twemoji-flag-saudi-arabia'" class="text-2xl" />
               <span class="text-xl ms-2">{{ locale == "ar" ? "English" : "العربية" }} </span>
             </button>
+            <ul class="lg:hidden flex items-center gap-x-3 justify-center border-t-2 pt-4">
+              <li>
+                <a href="https://www.facebook.com/fingerprintmedia1?mibextid=ZbWKwL" target="_blank"
+                  ><Icon class="text-gray-800 hover:text-[#1877f2] transition hover:scale-110 text-4xl" name="uil-facebook"
+                /></a>
+              </li>
+              <li>
+                <a href="#" target="_blank"><Icon class="text-gray-800 hover:text-[#1da1f2] transition hover:scale-110 text-4xl" name="mdi-twitter-box" /></a>
+              </li>
+              <li>
+                <a href="https://instagram.com/fingerprint_media_1?igshid=ZDdkNTZiNTM=" target="_blank"
+                  ><Icon class="text-gray-800 hover:text-[#c13584] transition hover:scale-110 text-4xl" name="ri-instagram-fill"
+                /></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/finger-print-2528361b1" target="_blank"
+                  ><Icon class="text-gray-800 hover:text-[#0a66c2] transition hover:scale-110 text-4xl" name="mdi-linkedin"
+                /></a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/fingerprintm" target="_blank"
+                  ><Icon class="text-gray-800 hover:text-[#fffc00] transition hover:scale-110 text-4xl" name="uil-snapchat-square"
+                /></a>
+              </li>
+              <li>
+                <a href="http://wa.me/201090844348" target="_blank"
+                  ><Icon class="text-gray-800 hover:text-[#4aae20] transition hover:scale-110 text-4xl" name="ri-whatsapp-fill"
+                /></a>
+              </li>
+            </ul>
           </div>
         </nav>
       </Transition>
@@ -173,22 +212,24 @@
         >
           <Icon name="mdi-bell" class="text-3xl text-inherit" />
           <div
+            v-if="Object.keys(notifications).length"
             class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900"
           >
-            {{ notifications.length }}
+            {{ notifications.notifications.length }}
           </div>
+          <!--  ?read=true -->
           <transition name="menu-down" v-show="hoverNotification">
             <div
+              v-if="Object.keys(notifications).length"
               style="display: none"
               class="bg-gray-50 dark:text-gray-300 dark:bg-gray-800 absolute top-10 start-0 w-72 rounded-lg shadow-xl dark:border-t dark:border-t-fpOrange"
             >
               <div class="flex items-center justify-between border-b border-b-fpLightGray dark:border-b-gray-700 pb-2 p-4">
                 <p class="text-gray-900 dark:text-gray-300 text-xl">{{ $t("notification") }}</p>
-                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">{{ notifications.length }} {{ $t("new") }}</span>
+                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">{{ notifications.notifications.length }} {{ $t("new") }}</span>
               </div>
               <ul class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-                <li v-for="notification in notifications" :key="notification.id">
-                  <!-- ?read=true -->
+                <li v-for="notification in notifications.notifications" :key="notification.id">
                   <nuxt-link
                     :to="localePath({path: `/blog/${notification.data.post.slug}`, query: {read: true}})"
                     class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2"
@@ -231,12 +272,12 @@ import {useAuthStore} from "@/store/AuthStore";
 import {useTostStore} from "@/store/TostStore";
 import {useSectionStore} from "@/store/SectionStore";
 import {useGlobalStore} from "@/store/GlobalStore";
+const globalStore = useGlobalStore();
+const route = useRoute();
 const auth = useAuthStore();
 const tost = useTostStore();
 const sectionsStore = useSectionStore();
-const globalStore = useGlobalStore();
 const baseURL = useRuntimeConfig().public.baseURL;
-
 const {currentLocale, dir} = useLang();
 const {locale, setLocale} = useI18n();
 const changelocal = () => {
@@ -305,24 +346,7 @@ async function logoutUser() {
   }
 }
 let notifications = ref([]);
-const notificationsUser = async () => {
-  if (notifications.value.length == 0 && localStorage.getItem("user") != null) {
-    try {
-      await $fetch(`${useRuntimeConfig().public.apiURL}/notificationsUser`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("user")}`,
-        },
-      }).then(res => {
-        notifications.value = res.data;
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-};
+
 const appSettings = async () => {
   try {
     await $fetch(`${useRuntimeConfig().public.apiURL}/app_settings`, {
@@ -336,7 +360,7 @@ const appSettings = async () => {
 };
 appSettings();
 if (process.client) {
-  notificationsUser();
+  globalStore.notificationsUser();
   if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user")) {
     getUserDetails();
   }

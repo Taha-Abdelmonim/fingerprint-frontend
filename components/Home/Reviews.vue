@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <div>
-      <Splide :options="options" class="container mx-auto review-slider">
+      <Splide :options="options" class="container mx-auto review-slider sm:px-0">
         <SplideSlide class="" v-for="review in reviews" :key="review.id">
           <div class="shadow-xl py-8 rounded-lg md:mx-4 sm:mx-1 bg-gray-100 dark:bg-gray-800 flex flex-col h-full">
             <div>
@@ -13,9 +13,9 @@
               <span class="block text-gray-600 dark:text-gray-300 mt-2 mb-4" v-text="review.comment"></span>
             </div>
             <div class="flex items-center justify-between mt-8 px-4 dark:text-fpLightBack">
-              <p class="font-medium text-xl text-main_color_2 mr-2" v-text="$t('name_section')"></p>
+              <p class="font-medium text-md lg:text-xl text-main_color_2 mr-2" v-text="$t('name_section')"></p>
               <!-- :to="localePath(`/${review.section.url}`)" -->
-              <p class="font-medium text-xl hover:text-fpRed mr-2" v-text="currentLocale == 'ar' ? review.section.name_ar : review.section.name_en"></p>
+              <p class="font-medium text-md lg:text-xl hover:text-fpRed mr-2" v-text="currentLocale == 'ar' ? review.section.name_ar : review.section.name_en"></p>
             </div>
           </div>
         </SplideSlide>
@@ -59,11 +59,11 @@ const options = {
   breakpoints: {
     768: {
       perPage: 2,
-      gap: "1rem",
+      arrows: false,
     },
     640: {
       perPage: 1,
-      gap: ".7rem",
+      arrows: false,
     },
   },
 };
@@ -80,11 +80,11 @@ const options = {
 .review-slider .splide__arrow--prev {
   background-image: url("~/assets/images/global/arrow_right.png");
   background-size: cover;
-  right: -1em;
+  /* right: -1em; */
 }
 .review-slider .splide__arrow--next {
   background-image: url("~/assets/images/global/arrow_left.png");
   background-size: cover;
-  left: -1em;
+  /* left: -1em; */
 }
 </style>

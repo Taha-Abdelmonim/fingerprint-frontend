@@ -1,5 +1,5 @@
 <template>
-  <BreadCrumbs :classes="'bg-breadcrumb text-white dark:text-fpLightBack'" :contents="['الخدمات', $t(`service_${route.params.slug}`)]" />
+  <BreadCrumbs :classes="'bg-breadcrumb text-white dark:text-fpLightBack'" :contents="[$t('services'), $t(`service_${route.params.slug}`)]" />
   <section class="bg-fpBlueDark/10 pb-40">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-20">

@@ -1,31 +1,31 @@
 <template>
-  <section class="md:pb-[100px] sm:mb-20 relative">
-    <BreadCrumbs :classes="'bg-breadcrumb put h-[450px] overlay text-white text-3xl'" :contents="[$t('blog')]" />
+  <section class="lg:pb-[100px] sm:mb-20 relative">
+    <BreadCrumbs :classes="' bg-breadcrumb put h-[450px] overlay text-white text-5xl lg:text-3xl'" :contents="[$t('blog')]" />
     <!--  | &ThinSpace; <Icon name="mingcute-share-2-line" class="text-3xl" /> مشاركة -->
     <div class="container mx-auto flex gap-x-20 sm:flex-col-reverse sm:items-center mt-20">
-      <div class="md:w-3/4 space-y-20">
+      <div class="sm:mt-40 lg:w-3/4 space-y-40 lg:space-y-20">
         <!-- start -->
         <div v-for="post in posts.data" :key="post.id">
           <div class="w-full mb-8 relative">
             <NuxtLink :to="localePath(`/blog/${post.slug}`)">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full md:h-[400px]" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full lg:h-[400px]" />
             </NuxtLink>
             <span
-              class="absolute sm:top-[-3rem] md:top-[-2rem] start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg rounded-md sm:w-28 sm:h-12 sm:right-12"
+              class="absolute sm:top-[-3rem] lg:top-[-2rem] start-14 lg:start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg lg:rounded-md sm:w-28 sm:h-12 sm:right-12"
               v-text="getDate(post.created_at)"
             >
             </span>
           </div>
 
-          <div class="text-gray-400 text-lg md:text-xl mb-8">
-            <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="w-10 h-10 rounded-full inline" />
-            <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="w-10 h-10 rounded-full inline" />
+          <div class="text-gray-400 text-lg lg:text-xl mb-8">
+            <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
+            <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
             {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
             <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
           </div>
           <NuxtLink
             :to="localePath(`/blog/${post.slug}`)"
-            class="font-bold text-fpOrange hover:text-fpRed text-xl md:text-4xl sm:my-4 md:mb-6 block hover:dark:text-white transition"
+            class="font-bold text-fpOrange hover:text-fpRed text-2xl lg:text-4xl sm:my-4 lg:mb-6 block hover:dark:text-white transition"
             v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"
           >
           </NuxtLink>
@@ -34,13 +34,13 @@
             :to="localePath(`/blog/${post.slug}`)"
             class="arro-hover leading-none relative bg-fpOrange hover:bg-fpOrangeDark transition py-1 px-4 text-base font-normal text-white rounded-md whitespace-nowrap flex items-center mt-10 w-fit"
           >
-            <Icon v-if="currentLocale == 'en'" name="ic-outline-arrow-back" class="text-3xl arrow-animate" />
-            <span class="ml-2 text-3xl">{{ $t("read_more") }}</span>
-            <Icon v-if="currentLocale == 'ar'" name="ic-outline-arrow-back" class="text-3xl arrow-animate" />
+            <Icon v-if="currentLocale == 'en'" name="ic-outline-arrow-back" class="text-lg lg:text-3xl arrow-animate" />
+            <span class="ml-2 text-lg lg:text-3xl">{{ $t("read_more") }}</span>
+            <Icon v-if="currentLocale == 'ar'" name="ic-outline-arrow-back" class="text-lg lg:text-3xl arrow-animate" />
           </NuxtLink>
         </div>
       </div>
-      <div class="md:w-1/4 sm:mt-16 md:ml-auto">
+      <div class="lg:w-1/4 lg:ml-auto">
         <div class="relative">
           <div class="relative h-fit">
             <input
@@ -83,7 +83,7 @@
             <input @change="filterPosts(section.id, $event)" class="fileter_checkbox w-6 h-6" type="checkbox" :id="`checkbox_${section.id}`" name="checkbox" :value="section.id" />
           </div>
         </div>
-        <div class="mt-10">
+        <div class="mt-20 lg:mt-10">
           <h2
             class="text-fpOrange font-medium text-3xl lg:text-4xl pb-6 relative after:content-[''] after:absolute after:w-1/2 after:h-2 after:bg-fpOrange after:start-0 after:bottom-0 after:translate-y-[50%]"
           >
@@ -91,7 +91,7 @@
           </h2>
           <hr />
         </div>
-        <div class="pt-4 bg-gray-100 divide-y-2 overflow-y-scroll sm:max-h-[500px] md:max-h-[700px] w-full no-scroll sm:shadow-md md:shadow-lg">
+        <div class="pt-4 bg-gray-100 divide-y-2 overflow-y-scroll sm:max-h-[500px] lg:max-h-[700px] w-full no-scroll sm:shadow-md lg:shadow-lg">
           <!-- mostWatchedPosts -->
           <div class="flex items-center w-full p-2 py-4 hover:bg-gray-200 transition" v-for="post in mostWatchedPosts" :key="post.id">
             <NuxtLink :to="localePath(`/blog/${post.slug}`)" class="block me-4 w-[40%] h-full">
@@ -100,7 +100,7 @@
             <div class="w-[60%]">
               <NuxtLink
                 :to="localePath(`/blog/${post.slug}`)"
-                class="text-fpOrange text-xl md:text-xl font-bold block mb-1"
+                class="text-fpOrange text-xl lg:text-xl font-bold block mb-1"
                 v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"
               ></NuxtLink>
               <Icon name="ic-outline-edit-calendar" class="text-gray-400 text-xl" /> <span class="text-fpOrange me-4" v-text="getDate(post.created_at)"></span>
@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="mt-32">
-      <div class="container ml-24 flex justify-between items-center">
+      <div class="container ml-24 flex flex-col lg:flex-row sm:gap-y-8 justify-between items-center">
         <div class="flex items-center gap-x-6">
           <button
             :disabled="posts.prev_page_url == null"
@@ -119,7 +119,7 @@
             :class="[posts.prev_page_url == null ? 'disabled' : '']"
             @click="getPostsPage(posts.prev_page_url)"
           >
-            <Icon name="ic-round-arrow-forward-ios" class="text-4xl" />
+            <Icon name="ic-round-arrow-forward-ios" class="text-4xl" :class="currentLocale == 'en' ? 'rotate-180' : ''" />
           </button>
           <button
             v-for="i in posts.last_page"
@@ -137,7 +137,7 @@
             class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition rounded-lg px-2 py-3"
             :class="[posts.next_page_url == null ? 'disabled' : '']"
           >
-            <Icon name="ic-baseline-arrow-back-ios" class="text-4xl me-3" />
+            <Icon name="ic-baseline-arrow-back-ios" class="text-4xl me-3" :class="currentLocale == 'en' ? 'rotate-180' : ''" />
           </button>
         </div>
         <div class="flex items-center gap-x-6">

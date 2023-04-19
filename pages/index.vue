@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- {{ $nuxt.$route.name }} -->
-    <section class="py-8 h-[70vh] overlay relative hero-section">
+    <section class="py-20 lg:py-40 overlay relative hero-section">
       <ClientOnly>
         <div>
           <Splide :options="options_hero" aria-label="My Favorite Images test" class="absolute inset-0 visible">
@@ -102,26 +102,28 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div class="text-center">
             <b class="text-5xl text-white">49<span class="text-fpOrange text-6xl">+</span></b>
-            <p class="text-white text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("site_count") }}</p>
+            <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("site_count") }}</p>
           </div>
           <div class="text-center sm:mt-16">
             <b class="text-5xl text-white">146<span class="text-fpOrange text-6xl">+</span></b>
-            <p class="text-white text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("big_ads") }}</p>
+            <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("big_ads") }}</p>
           </div>
           <div class="text-center sm:mt-16">
             <b class="text-5xl text-white">6<span class="text-fpOrange text-6xl">+</span></b>
-            <p class="text-white text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("years_experiance") }}</p>
+            <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("years_experiance") }}</p>
           </div>
           <div class="text-center sm:mt-16">
             <b class="text-5xl text-white">34<span class="text-fpOrange text-6xl">+</span></b>
-            <p class="text-white text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("client") }}</p>
+            <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("client") }}</p>
           </div>
         </div>
       </div>
     </section>
     <section id="clintes">
-      <div class="container mx-auto pb-16 pt-36">
-        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("success_partners") }}</h2>
+      <div class="container mx-auto pb-16 pt-20 lg:pt-36">
+        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-4 mb-16">
+          {{ $t("success_partners") }}
+        </h2>
         <ClientOnly>
           <Splide :options="options_partners" aria-label="My Favorite Images" class="">
             <!-- <SplideSlide>
@@ -144,14 +146,14 @@
       </div>
     </section>
     <section>
-      <div class="container mx-auto pt-16">
-        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("blog") }}</h2>
+      <div class="container mx-auto pt-10 lg:pt-16">
+        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-4 lg:mb-16">{{ $t("blog") }}</h2>
         <BlogSlider />
       </div>
     </section>
-    <section id="reviews" class="pt-40">
-      <div class="container mx-auto pb-40">
-        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-16">{{ $t("reviews") }}</h2>
+    <section id="reviews" class="lg:pt-40">
+      <div class="container mx-auto pb-20 lg:pb-40">
+        <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-4 lg:mb-16">{{ $t("reviews") }}</h2>
         <HomeReviews />
       </div>
     </section>

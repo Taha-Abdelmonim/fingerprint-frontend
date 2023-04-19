@@ -108,15 +108,25 @@ nav a.router-link-active {
   @apply border border-red-600;
 }
 @media (min-width: 1025px) {
+  .splide__arrow--prev {
+    background-image: url("~/assets/images/global/arrow_right.png");
+    background-size: cover;
+    @apply ltr:end-4 ltr:start-auto;
+  }
+  .splide__arrow--next {
+    background-image: url("~/assets/images/global/arrow_left.png");
+    background-size: cover;
+    @apply ltr:end-auto ltr:start-4;
+  }
 }
 @media (max-width: 1024px) {
   .bg-hero {
     /* background-size: 100% !important; */
   }
 }
-[disabled],
-[disabled]:hover,
-.disabled {
+[disabled]:not(.splide__arrow),
+[disabled]:not(.splide__arrow):hover,
+.disabled:not(.splide__arrow) {
   background: #c0c2c5 !important;
   border: none !important;
   color: #374151 !important;

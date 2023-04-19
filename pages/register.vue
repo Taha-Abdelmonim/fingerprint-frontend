@@ -1,8 +1,8 @@
 <template>
   <BreadCrumbs :classes="' dark:text-fpLightBack'" :contents="[$t('new_account')]" />
-  <section class="bg-fpBlueDark/10 pt-8 pb-40">
+  <section class="bg-fpBlueDark/10 pt-8 pb-20 lg:pb-40">
     <div
-      class="sm:py-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center items-center gap-x-10 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl p-0 lg:h-[80vh]"
+      class="sm:py-10 sm:mx-3 mx-auto lg:w-[1200px] flex flex-col-reverse lg:flex-row justify-center lg:items-center gap-x-10 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl p-0 lg:h-[80vh]"
     >
       <div class="lg:w-1/2 lg:ps-4 lg:ms-28 sm:px-4">
         <h1 class="font-bold text-center text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange mb-10">{{ $t("new_account") }}</h1>
@@ -67,18 +67,7 @@
             </div>
             <p v-if="errors.has('password')" class="mt-2 text-sm text-red-500">{{ errors.get("password") }}</p>
           </div>
-          <div class="flex justify-between items-center">
-            <!-- <div class="flex items-center">
-              <input
-                checked
-                id="green-checkbox"
-                type="checkbox"
-                value=""
-                class="w-6 h-6 cursor-pointer bg-gray-100 border-gray-300 rounded dark:bg-gray-900 dark:appearance-none"
-              />
-              <label for="green-checkbox" class="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300 cursor-pointer select-none">{{ $t("remember") }}</label>
-            </div> -->
-          </div>
+
           <button
             type="submit"
             class="text-fpBlueDark bg-fpOrange hover:bg-fpOrange/90 transition-colors focus:ring-4 focus:ring-fpOrange font-bold rounded-lg text-lg lg:text-2xl mt-6 px-4 lg:px-10 py-2 lg:py-3 mx-auto block dark:bg-fpOrange dark:hover:bg-fpOrange focus:outline-none dark:focus:ring-fpOrange"
