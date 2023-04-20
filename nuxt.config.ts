@@ -1,9 +1,9 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// https://nuxt.com/docs/api/configuration/nuxt-config http://127.0.0.1:8000/
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      apiURL: 'http://127.0.0.1:8000/api',
-      baseURL: 'http://127.0.0.1:8000',
+      apiURL: 'https://backend.fingerprintm.com/api',
+      baseURL: 'https://backend.fingerprintm.com/',
     },
   },
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/tailwindcss', 'nuxt-icon'],
