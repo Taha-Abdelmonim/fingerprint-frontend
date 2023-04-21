@@ -1,0 +1,1 @@
+import{$ as o}from"./entry.92606d73.js";let s=1;const n=o("tost",{state:()=>({notifications:[]}),actions:{add(t){this.notifications.push({...t,id:s++})},remove(t){this.notifications=this.notifications.filter(i=>i.id!==t.id)}}});export{n as u};

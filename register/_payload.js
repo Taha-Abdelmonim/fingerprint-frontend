@@ -1,0 +1,1 @@
+export default {data:{items:["إنشاء حساب جديد"]},prerenderedAt:1682037149248}

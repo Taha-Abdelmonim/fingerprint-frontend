@@ -1,0 +1,1 @@
+export default {data:{items:["Create a new account"]},prerenderedAt:1682037149292}

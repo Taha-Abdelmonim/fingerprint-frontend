@@ -1,0 +1,1 @@
+export default {data:{items:["تسجيل الدخول"]},prerenderedAt:1682037148880}

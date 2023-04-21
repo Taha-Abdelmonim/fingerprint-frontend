@@ -1,0 +1,1 @@
+import{$ as s,A as i}from"./entry.92606d73.js";const c=s("sections",{state:()=>({sections:[],sectionsActive:[]}),actions:{async getSections(t=""){return t=t==""?"":"?active=true",this.sections.length==0?await $fetch(`${i().public.apiURL}/getSections${t}`).then(e=>(t==""?this.sections=e.data:this.sectionsActive=e.data,e)):this.sections}}});export{c as u};

@@ -1,0 +1,1 @@
+export default {data:{items:["من نحن"]},prerenderedAt:1682037148384}

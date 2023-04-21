@@ -1,0 +1,1 @@
+export default {data:{items:["customer reviews"]},prerenderedAt:1682037149367}

@@ -1,0 +1,1 @@
+export default {data:{items:["Profile","تعديل"]},prerenderedAt:1682037149199}

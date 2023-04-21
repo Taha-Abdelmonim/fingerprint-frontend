@@ -1,0 +1,1 @@
+export default {data:{items:["سياسة الخصوصية"]},prerenderedAt:1682037149075}
