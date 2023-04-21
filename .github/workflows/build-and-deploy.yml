@@ -23,6 +23,7 @@ jobs:
 
     - name: Install dependencies & Generate 🔧
       run: |
+        npm install
         npm ci
         npm run generate
       env:
