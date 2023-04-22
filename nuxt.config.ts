@@ -1,4 +1,4 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config http://127.0.0.1:8000/
+// https://nuxt.com/docs/api/configuration/nuxt-config http://127.0.0.1:8000/ https://backend.fingerprintm.com
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
