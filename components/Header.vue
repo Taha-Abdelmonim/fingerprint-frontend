@@ -287,7 +287,8 @@ let mode = ref("light");
 let hoverNotification = ref(false);
 let hoverServices = ref(false);
 let toggleMenu = ref(false);
-sectionsStore.getSections("active");
+// "active"
+sectionsStore.getSections();
 onMounted(() => {
   if (window.matchMedia("(max-width: 1024px)").matches) {
     toggleMenu.value = false;
