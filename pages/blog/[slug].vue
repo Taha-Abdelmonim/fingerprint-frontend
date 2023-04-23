@@ -101,7 +101,7 @@
       </div>
     </section>
 
-    <!-- <div class="sharethis-sticky-share-buttons"></div> -->
+    <div class="sharethis-sticky-share-buttons"></div>
   </section>
 </template>
 <script setup>
