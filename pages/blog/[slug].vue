@@ -111,16 +111,9 @@ const route = useRoute();
 const baseURL = useRuntimeConfig().public.baseURL;
 const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
+const {t} = useI18n();
 let post = ref([]);
-useHead({
-  script: [
-    {
-      type: "text/javascript",
-      src: "https://platform-api.sharethis.com/js/sharethis.js#property=643d6dbd9806e4001a16ee2b&product=sticky-share-buttons&source=platform",
-      async: "async",
-    },
-  ],
-});
+
 const getPost = async () => {
   try {
     let read = "";
@@ -137,8 +130,40 @@ const getPost = async () => {
       },
     }).then(res => {
       post.value = res.data;
+      res = res.data;
       useHead({
-        title: currentLocale.value == "ar" ? post.value.name_ar : post.value.name_en,
+        title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
+        meta: [
+          {name: "title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {name: "description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          // facebook   
+          {property: "article:publisher", content: "https://www.facebook.com/fingerprintmedia1"},
+          {property: "og:locale", content: currentLocale.value},
+          {property: "og:type", content: "article"},
+          {property: "og:url", content: `${baseURL}/blog/${res.slug}`},
+          {property: "og:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "og:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "og:image", content: `${baseURL}/images/${res.photo}`},
+          {property: "og:site_name", content: t("fingerprint")},
+          {property: "og:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          // Twitter
+          {property: "twitter:card", content: "summary_large_image"},
+          {property: "twitter:url", content: `${baseURL}/blog/${res.slug}`},
+          {property: "twitter:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "twitter:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "twitter:type", content: "article"},
+          {property: "twitter:image", content: `${baseURL}/images/${res.slug}`},
+          {property: "twitter:site", content: t("fingerprint")},
+          {property: "twitter:site_name", content: t("fingerprint")},
+          {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+        ],
+        script: [
+          {
+            type: "text/javascript",
+            src: "https://platform-api.sharethis.com/js/sharethis.js#property=643d6dbd9806e4001a16ee2b&product=sticky-share-buttons&source=platform",
+            async: "async",
+          },
+        ],
       });
     });
   } catch (error) {

@@ -167,6 +167,7 @@ const {t} = useI18n();
 useHead({
   title: t("home"),
   meta: [{name: "title", content: t("home")}],
+  
 });
 const {currentLocale, dir} = useLang();
 const options_hero = {
