@@ -18,6 +18,7 @@ const {t} = useI18n();
 const route = useRoute();
 if (!route.fullPath.slice(1, 5) == "blog") {
   useHead({
+    script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sop", async: "async"}],
     meta: [
       // global
       {charset: "utf-8"},
