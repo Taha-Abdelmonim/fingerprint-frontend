@@ -2,7 +2,6 @@
   <Html :lang="currentLocale">
     <Body :dir="dir" class="dark:bg-gray-900">
       <ButtonUp />
-      <div class="sharethis-sticky-share-buttons"></div>
       <NuxtLoadingIndicator />
       <NuxtLayout>
         <Loading />
@@ -20,7 +19,6 @@ const route = useRoute();
 console.log(route.fullPath.slice(1, 5) != "blog");
 if (route.fullPath.slice(1, 5) != "blog") {
   useHead({
-    script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sop", async: "async"}],
     meta: [
       // global
       {charset: "utf-8"},
