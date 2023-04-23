@@ -160,7 +160,7 @@ const getPost = async () => {
         script: [
           {
             type: "text/javascript",
-            src: "https://platform-api.sharethis.com/js/sharethis.js#property=643d6dbd9806e4001a16ee2b&product=sticky-share-buttons&source=platform",
+            src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform",
             async: "async",
           },
         ],
