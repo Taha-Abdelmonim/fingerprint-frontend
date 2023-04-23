@@ -95,13 +95,17 @@ const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 let togglePassword = ref(false);
 const apiUrl = useRuntimeConfig().public.apiURL + "/auth";
+const auth = useAuthStore();
+const tost = useTostStore();
 const {t} = useI18n();
 useHead({
   title: t("login"),
   meta: [{name: "title", content: t("login")}],
 });
-const auth = useAuthStore();
-const tost = useTostStore();
+if (process.client && localStorage.getItem("user") != null) {
+  navigateTo("/")
+}
+
 // console.log(auth.isLoggedIn);
 let login = reactive({
   email: "",

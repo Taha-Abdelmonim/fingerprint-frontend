@@ -207,29 +207,29 @@
           type="button"
           class="relative hidden lg:flex items-center text-sm font-medium text-center bg-gray-50 dark:bg-gray-700 hover:bg-fpOrange rounded-full p-1 text-fpOrange hover:text-fpRed transition"
           @mouseenter="hoverNotification = !hoverNotification"
-          @mouseleave="hoverNotification = !hoverNotification"
+          @mouseleave="hoverNotification = false"
           v-if="auth.isLoggedIn"
         >
           <Icon name="mdi-bell" class="text-3xl text-inherit" />
           <div
-            v-if="Object.keys(notifications).length"
+            v-if="Object.keys(globalStore.notifications).length"
             class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900"
           >
-            {{ notifications.notifications.length }}
+            {{ globalStore.notifications.length }}
           </div>
           <!--  ?read=true -->
-          <transition name="menu-down" v-show="hoverNotification">
+          <transition name="menu-down" v-show="hoverNotification" v-if="Object.keys(globalStore.notifications).length > 0">
             <div
-              v-if="Object.keys(notifications).length"
+              
               style="display: none"
               class="bg-gray-50 dark:text-gray-300 dark:bg-gray-800 absolute top-10 start-0 w-72 rounded-lg shadow-xl dark:border-t dark:border-t-fpOrange"
             >
               <div class="flex items-center justify-between border-b border-b-fpLightGray dark:border-b-gray-700 pb-2 p-4">
                 <p class="text-gray-900 dark:text-gray-300 text-xl">{{ $t("notification") }}</p>
-                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">{{ notifications.notifications.length }} {{ $t("new") }}</span>
+                <span class="bg-fpRed text-white px-2 py-1.5 rounded-full">{{ globalStore.notifications.length }} {{ $t("new") }}</span>
               </div>
               <ul class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-                <li v-for="notification in notifications.notifications" :key="notification.id">
+                <li v-for="notification in globalStore.notifications" :key="notification.id">
                   <nuxt-link
                     :to="localePath({path: `/blog/${notification.data.post.slug}`, query: {read: true}})"
                     class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2"
@@ -288,7 +288,7 @@ let hoverNotification = ref(false);
 let hoverServices = ref(false);
 let toggleMenu = ref(false);
 // "active"
-sectionsStore.getSections();
+sectionsStore.getSections("active");
 onMounted(() => {
   if (window.matchMedia("(max-width: 1024px)").matches) {
     toggleMenu.value = false;
@@ -346,7 +346,6 @@ async function logoutUser() {
     console.log(err);
   }
 }
-let notifications = ref([]);
 
 const appSettings = async () => {
   try {

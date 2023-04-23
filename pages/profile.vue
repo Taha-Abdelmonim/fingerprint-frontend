@@ -67,6 +67,9 @@ function getDate(date) {
   let seconds = $created_at.getSeconds() < 10 ? `0${$created_at.getSeconds()}` : $created_at.getSeconds();
   return `${dey}-${month}-${year} ${seconds}:${minutes}:${hour}`;
 }
+if (process.client && localStorage.getItem("user") == null) {
+  navigateTo("/")
+}
 /* 
 if (process.client) {
   if (Object.keys(auth.user).length <= 0 && localStorage.getItem("user")) {

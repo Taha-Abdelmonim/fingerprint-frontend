@@ -141,13 +141,13 @@ const tost = useTostStore();
 const globalStore = useGlobalStore();
 const {locale, setLocale} = useI18n();
 const {currentLocale, dir} = useLang();
+const baseURL = useRuntimeConfig().public.baseURL;
 let hoverNotification = ref(false);
 let mode = ref("light");
 if (process.client) {
   globalStore.notificationsUser();
 }
 const toggleDarkmode = () => {
-  console.log("dd");
   mode.value = localStorage.getItem("mode") != null ? localStorage.getItem("mode") : mode.value;
   if (mode.value == "light") {
     localStorage.setItem("mode", "dark");
