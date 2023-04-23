@@ -113,7 +113,9 @@ const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 const {t} = useI18n();
 let post = ref([]);
-
+useHead({
+  script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sop", async: "async"}],
+});
 const getPost = async () => {
   try {
     let read = "";
@@ -157,13 +159,7 @@ const getPost = async () => {
           {property: "twitter:site_name", content: t("fingerprint")},
           {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
         ],
-        script: [
-          {
-            type: "text/javascript",
-            src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sop",
-            async: "async",
-          },
-        ],
+        
       });
     });
   } catch (error) {
