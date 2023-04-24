@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#ffffff" },
         { property: "og:title", hid: "og:title", content: "بصمة" },
         { property: "og:image", hid: "og:image", content: "https://backend.fingerprintm.com/images/bg-logo.png" },
-        { property: "fb:app_id", hid: "fb:app_id", content: "574545918103243" },
+        { property: "fb:app_id", hid: "fb:app_id", content: "1229977241051676" },
       ],
       script: [
       ]
