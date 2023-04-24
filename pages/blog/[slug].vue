@@ -113,9 +113,9 @@ const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 const {t} = useI18n();
 let post = ref([]);
-useHead({
+/* useHead({
   script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
-});
+}); */
 const getPost = async () => {
   try {
     let read = "";
