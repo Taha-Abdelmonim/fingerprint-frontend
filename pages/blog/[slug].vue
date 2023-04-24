@@ -1,6 +1,5 @@
 <template>
-  
-  <section class="blog">
+  <article class="blog">
     <BreadCrumbs
       :classes="'bg-breadcrumb put h-[200px] lg:h-[450px] overlay text-white text-3xl blog-slug'"
       :contents="[$t('blog'), currentLocale == 'ar' ? post.name_ar : post.name_en]"
@@ -103,7 +102,7 @@
     </section>
 
     <div class="sharethis-sticky-share-buttons"></div>
-  </section>
+  </article>
 </template>
 <script setup>
 import {useTostStore} from "@/store/TostStore";
@@ -132,10 +131,11 @@ const getPost = async () => {
     }).then(res => {
       post.value = res.data;
       res = res.data;
+      /* useHead({
+        script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
+      }); */
       useHead({
         script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
-      });
-      /* useHead({
         title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
         meta: [
           {name: "title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
@@ -162,7 +162,7 @@ const getPost = async () => {
           {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
         ],
         
-      }); */
+      });
     });
   } catch (error) {
     console.log(error);

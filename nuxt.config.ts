@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config http://127.0.0.1:8001/ https://backend.fingerprintm.com
 export default defineNuxtConfig({
+  ssr: true,
   runtimeConfig: {
     public: {
       apiURL: 'https://backend.fingerprintm.com/api',
