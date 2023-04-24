@@ -3,17 +3,7 @@
     <Body :dir="dir" class="dark:bg-gray-900">
       <ButtonUp />
       <NuxtLoadingIndicator />
-      <fb:login-button
-        class="fb-login-button md:mr-2"
-        data-width=""
-        data-size="large"
-        data-button-type="login_with"
-        data-layout="default"
-        data-auto-logout-link="false"
-        data-use-continue-as="true"
-        scope="public_profile,email"
-        onlogin="checkLoginState()"
-      ></fb:login-button>
+
       <NuxtLayout>
         <Loading />
         <NuxtPage />
@@ -58,49 +48,5 @@ if (route.fullPath.slice(1, 5) != "blog") {
       {property: "twitter:alt", content: t("fingerprint")},
     ],
   });
-}
-if (process.client) {
-  // facebook
-  (function (d, s, id) {
-    var js,
-      fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-      return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=517999570183481&autoLogAppEvents=1";
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, "script", "facebook-jssdk");
-  window.checkLoginState = function () {
-    FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
-  };
-
-  function statusChangeCallback(response) {
-    if (response.status === "connected") {
-      testAPI(response.authResponse);
-    }
-  }
-
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: "1229977241051676",
-      cookie: true,
-      xfbml: true,
-      version: "v16.0",
-    });
-
-    /* FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    }); */
-  };
-
-  function testAPI(resInfoUser) {
-    FB.api(`/${resInfoUser.userID}?fields=id,name,email,picture&access_token=${resInfoUser.accessToken}`, function (response) {
-      console.log(response);
-    });
-  }
 }
 </script>
