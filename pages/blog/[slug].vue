@@ -137,7 +137,7 @@ const getPost = async () => {
       /* useHead({
         script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
       }); */
-      /* useHead({
+      useHead({
         script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
         title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
         meta: [
@@ -165,17 +165,29 @@ const getPost = async () => {
           {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
         ],
         
-      }); */
+      });
     });
   } catch (error) {
     console.log(error);
   }
 };
 
-
-onBeforeMount(async () => {
-  await getPost()
+onNuxtReady(() => {
+  getPost()
 })
+/* onBeforeResolve(to, from, next) {
+  console.log(to);
+   let data = fetch(`https://backend.fingerprintm.com/api/post/${to.params.slug}`, {
+      method: "POST",
+      
+    }).then(res => {
+      res.json().then((result) => {
+        
+        return result.data;
+      });
+      next(true)
+    });
+} */  
 
 function getDate(date) {
   var $created_at = new Date(date);
@@ -232,48 +244,7 @@ const commentPost = async () => {
 };
 
 </script>
-<script>
 
-export default {
-  beforeRouteEnter(to, from, next) {
-    let data = fetch(`https://backend.fingerprintm.com/api/post/${to.params.slug}`, {
-      method: "POST",
-      
-    }).then(res => {
-      res.json().then((result) => {
-        
-        return result.data;
-      });
-      next(true)
-    });
-  },  
-  
-}
-/* meta: [
-              {name: "title", content:  result.name_ar},
-              {name: "description", content: result.description_ar},
-              // facebook   
-              {property: "article:publisher", content: "https://www.facebook.com/fingerprintmedia1"},
-              {property: "og:locale", content: "ar"},
-              {property: "og:type", content: "article"},
-              {property: "og:url", content: `https://backend.fingerprintm.com/blog/${result.slug}`},
-              {property: "og:title", content:  result.name_en},
-              {property: "og:description", content: result.description_ar},
-              {property: "og:image", content: `https://backend.fingerprintm.com/images/${result.photo}`},
-              {property: "og:site_name", content: "بصمة"},
-              {property: "og:alt", content:  result.name_en},
-              // Twitter
-              {property: "twitter:card", content: "summary_large_image"},
-              {property: "twitter:url", content: `https://backend.fingerprintm.com/blog/${result.slug}`},
-              {property: "twitter:title", content:  result.name_en},
-              {property: "twitter:description", content: result.description_ar},
-              {property: "twitter:type", content: "article"},
-              {property: "twitter:image", content: `https://backend.fingerprintm.com/images/${result.slug}`},
-              {property: "twitter:site", content: "بصمة"},
-              {property: "twitter:site_name", content: "بصمة"},
-              {property: "twitter:alt", content:  result.name_en},
-            ]; */
-</script>
 <style>
 .blog-slug .bread-crumbs {
   @apply sm:text-[27px] sm:flex-col;
