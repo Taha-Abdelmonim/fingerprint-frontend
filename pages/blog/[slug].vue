@@ -105,6 +105,7 @@
   </article>
 </template>
 <script setup>
+
 import {useTostStore} from "@/store/TostStore";
 const tost = useTostStore();
 const route = useRoute();
@@ -113,7 +114,11 @@ const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 const {t} = useI18n();
 let post = ref([]);
-
+/* headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user")}`,
+      }, */
 const getPost = async () => {
   try {
     let read = "";
@@ -123,11 +128,7 @@ const getPost = async () => {
 
     await $fetch(`${useRuntimeConfig().public.apiURL}/post/${route.params.slug}${read}`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("user")}`,
-      },
+      
     }).then(res => {
       post.value = res.data;
       res = res.data;
@@ -168,9 +169,10 @@ const getPost = async () => {
     console.log(error);
   }
 };
-if (process.client) {
-  getPost();
-}
+onBeforeMount(() => {
+  getPost()
+})
+
 function getDate(date) {
   var $created_at = new Date(date);
   let year = $created_at.getFullYear();
@@ -222,7 +224,9 @@ const commentPost = async () => {
   } catch (error) {
     console.log(error);
   }
+
 };
+
 </script>
 <style>
 .blog-slug .bread-crumbs {
