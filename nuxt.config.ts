@@ -38,8 +38,9 @@ export default defineNuxtConfig({
         { name: "msapplication-TileColor", content: "#ffffff" },
         { name: "msapplication-TileImage", content: "/favicon/ms-icon-144x144.png" },
         { name: "theme-color", content: "#ffffff" },
-        { property: "og:title", hid: "og:title", content: "og title" },
+        { property: "og:title", hid: "og:title", content: "بصمة" },
         { property: "og:image", hid: "og:image", content: "https://backend.fingerprintm.com/images/bg-logo.png" },
+        { property: "fb:app_id", hid: "fb:app_id", content: "574545918103243" },
       ],
       script: [
       ]

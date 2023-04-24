@@ -47,5 +47,5 @@ if (route.fullPath.slice(1, 5) != "blog") {
       {property: "twitter:alt", content: t("fingerprint")},
     ],
   });
-} 
+}
 </script>
