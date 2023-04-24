@@ -115,12 +115,7 @@ const baseURL = useRuntimeConfig().public.baseURL;
 const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 const {t} = useI18n();
-useHead({
-  script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
-  meta: [
-  {property: "og:url", content: `${baseURL}/blog/${route.params.slug}`},
-  ]
-});
+
 let post = ref([]);
 /* headers: {
         Accept: "application/json",
@@ -140,9 +135,9 @@ const getPost = async () => {
     }).then(res => {
       post.value = res.data;
       res = res.data;
-     
       useHead({
         title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
+        script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
         meta: [
           {name: "title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
           {name: "description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
