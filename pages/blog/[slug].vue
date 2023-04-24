@@ -241,11 +241,7 @@ export default {
       
     }).then(res => {
       res.json().then((result) => {
-        let meta = document.createElement("meta");
-        meta.setAttribute("property", "og:title");
-        meta.content = result.data.name_ar;
-        document.head.prepend(meta)
-        console.log(meta);
+        
         return result.data;
       });
       next(true)
