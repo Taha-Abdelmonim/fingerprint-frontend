@@ -1,4 +1,11 @@
 <template>
+  <Head v-if="Object.keys(post).length">
+    <Title>{{ currentLocale == "ar" ? res.name_ar : res.name_en }}</Title>
+    <Meta hid="og:url" property="og:url" :content="`${baseURL}/blog/${res.slug}`" />
+    <Meta hid="og:title" property="og:title" :content="currentLocale == 'ar' ? res.name_ar : res.name_en" />
+    <Meta hid="og:description" property="og:description" :content="currentLocale == 'ar' ? res.description_ar : res.description_en" />
+    <Meta hid="og:image" property="og:image" :content="`${baseURL}/images/${res.photo}`" />
+  </Head>
   <section class="blog">
     <BreadCrumbs
       :classes="'bg-breadcrumb put h-[200px] lg:h-[450px] overlay text-white text-3xl blog-slug'"
