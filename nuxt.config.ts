@@ -43,6 +43,7 @@ export default defineNuxtConfig({
         { property: "fb:app_id", hid: "fb:app_id", content: "1229977241051676" },
       ],
       script: [
+        { src: 'https://accounts.google.com/gsi/client' },
       ]
     },
   },

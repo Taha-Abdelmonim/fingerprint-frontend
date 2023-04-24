@@ -47,8 +47,8 @@
           >
             {{ $t("login") }}
           </button>
-          <!-- 
-            <div class="flex justify-between items-center">
+
+          <div class="flex justify-between items-center">
             <div class="flex items-center">
               <input
                 checked
@@ -61,21 +61,26 @@
             </div>
             <a href="#" class="text-red-500">{{ $t("forgot_password") }}</a>
           </div>
-            <div class="flex items-center justify-center mt-10">
+          <div class="flex items-center justify-center mt-10">
             <span class="w-20 h-1.5 bg-fpBlueDark rounded-full mt-1 me-4"></span>
             <p class="text-fpBlueDark font-bold text-xl lg:text-3xl">{{ $t("or_register_from") }}</p>
             <span class="w-20 h-1.5 bg-fpBlueDark rounded-full mt-1 ms-4"></span>
           </div>
           <div class="flex flex-col lg:flex-row sm:gap-y-4 items-center justify-between mt-10">
-            <button class="border-2 px-4 py-2 rounded-lg">
-              <Icon name="mdi-google" class="text-green-500" />
-              <span class="">تسجيل الدخول عبر جوجل</span>
-            </button>
-            <button class="border-2 px-4 py-2 rounded-lg">
-              <Icon name="mdi-google" class="text-green-500" />
-              <span class="">تسجيل الدخول عبر جوجل</span>
-            </button>
-          </div> -->
+            <div id="googleButton"></div>
+            <br />
+            <fb:login-button
+              class="fb-login-button md:mr-2"
+              data-width=""
+              data-size="large"
+              data-button-type="login_with"
+              data-layout="default"
+              data-auto-logout-link="false"
+              data-use-continue-as="true"
+              scope="public_profile,email"
+              onlogin="checkLoginState()"
+            ></fb:login-button>
+          </div>
           <div class="text-md lg:text-xl mt-5 lg:mt-10">
             <span class="dark:text-gray-300">{{ $t("dont_account") }}</span>
             <nuxt-link :to="localePath(`/register`)" class="text-fpBlueDark dark:text-fpOrange font-bold ms-1">{{ $t("new_account") }}</nuxt-link>
@@ -103,7 +108,7 @@ useHead({
   meta: [{name: "title", content: t("login")}],
 });
 if (process.client && localStorage.getItem("user") != null) {
-  navigateTo("/")
+  navigateTo("/");
 }
 
 // console.log(auth.isLoggedIn);
@@ -139,4 +144,85 @@ async function submitUserLogin() {
     })
   );
 }
+const returnDataGoogle = credential => {
+  const res = fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`).then(res => {
+    return res.json();
+  });
+  res.then(res => {
+    console.log(res);
+    /* registerValue.name = res.name;
+    registerValue.email = res.email;
+    registerValue.image = res.picture;
+    registerValue.provider = "google";
+    registerValue.provider_user_id = res.exp;
+    onResponceLogin(); */
+  });
+};
+onMounted(() => {
+  function handleCredentialResponse(response) {
+    returnDataGoogle(response.credential);
+    // call your backend API here
+    // the token can be accessed as: response.credential
+  }
+  google.accounts.id.initialize({
+    client_id: "309314815545-qi9o7jvgj7k5ok4kfonlcguauptadasg.apps.googleusercontent.com",
+    callback: handleCredentialResponse, //method to run after user clicks the Google sign in button
+  });
+  google.accounts.id.renderButton(
+    document.getElementById("googleButton"),
+    {theme: "outline", size: "large"} // customization attributes
+  );
+  //google.accounts.id.prompt(); // also display the One Tap dialog
+
+  // facebook
+  (function (d, s, id) {
+    var js,
+      fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=517999570183481&autoLogAppEvents=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, "script", "facebook-jssdk");
+  window.checkLoginState = function () {
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+  };
+
+  function statusChangeCallback(response) {
+    if (response.status === "connected") {
+      testAPI(response.authResponse);
+    }
+  }
+
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: "517999570183481",
+      cookie: true,
+      xfbml: true,
+      version: "v15.0",
+    });
+
+    /* FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    }); */
+  };
+
+  function testAPI(resInfoUser) {
+    FB.api(`/${resInfoUser.userID}?fields=id,name,email,picture&access_token=${resInfoUser.accessToken}`, function (response) {
+      console.log(response);
+      /* registerValue.name = response.name;
+      registerValue.email = response.email;
+      registerValue.image = response.picture.data.url;
+      registerValue.provider = "facebook";
+      registerValue.provider_user_id = response.id;
+      onResponceLogin(response); */
+    });
+    /* FB.api("/me", function (response) {
+      }); */
+  }
+});
 </script>
