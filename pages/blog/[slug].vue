@@ -169,8 +169,8 @@ const getPost = async () => {
     console.log(error);
   }
 };
-onBeforeMount(() => {
-  getPost()
+onBeforeMount(async () => {
+  await getPost()
 })
 
 function getDate(date) {
