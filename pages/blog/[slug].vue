@@ -1,10 +1,10 @@
 <template>
   <Head v-if="Object.keys(post).length">
-    <Title>{{ currentLocale == "ar" ? res.name_ar : res.name_en }}</Title>
-    <Meta hid="og:url" property="og:url" :content="`${baseURL}/blog/${res.slug}`" />
-    <Meta hid="og:title" property="og:title" :content="currentLocale == 'ar' ? res.name_ar : res.name_en" />
-    <Meta hid="og:description" property="og:description" :content="currentLocale == 'ar' ? res.description_ar : res.description_en" />
-    <Meta hid="og:image" property="og:image" :content="`${baseURL}/images/${res.photo}`" />
+    <Title>{{ currentLocale == "ar" ? post.name_ar : post.name_en }}</Title>
+    <Meta hid="og:url" property="og:url" :content="`${baseURL}/blog/${post.slug}`" />
+    <Meta hid="og:title" property="og:title" :content="currentLocale == 'ar' ? post.name_ar : post.name_en" />
+    <Meta hid="og:description" property="og:description" :content="currentLocale == 'ar' ? post.description_ar : post.description_en" />
+    <Meta hid="og:image" property="og:image" :content="`${baseURL}/images/${post.photo}`" />
   </Head>
   <section class="blog">
     <BreadCrumbs
@@ -120,9 +120,7 @@ const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 const {t} = useI18n();
 let post = ref([]);
-/* useHead({
-  script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
-}); */
+
 const getPost = async () => {
   try {
     let read = "";
@@ -140,6 +138,9 @@ const getPost = async () => {
     }).then(res => {
       post.value = res.data;
       res = res.data;
+      useHead({
+        script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
+      });
       /* useHead({
         title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
         meta: [
