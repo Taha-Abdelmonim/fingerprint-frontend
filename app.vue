@@ -47,5 +47,47 @@ if (route.fullPath.slice(1, 5) != "blog") {
       {property: "twitter:alt", content: t("fingerprint")},
     ],
   });
-} 
+} else {
+  let post = ref([]);
+  let read = "";
+    if (route.query.read == "true") {
+      read = "?read=true";
+    }
+  await $fetch(`${useRuntimeConfig().public.apiURL}/post/${route.params.slug}${read}`, {
+      method: "POST",
+      
+    }).then(res => {
+      post.value = res.data;
+      res = res.data;
+      useHead({
+        script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
+        title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
+        meta: [
+          {name: "title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {name: "description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          // facebook   
+          {property: "article:publisher", content: "https://www.facebook.com/fingerprintmedia1"},
+          {property: "og:locale", content: currentLocale.value},
+          {property: "og:type", content: "article"},
+          {property: "og:url", content: `${baseURL}/blog/${res.slug}`},
+          {property: "og:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "og:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "og:image", content: `${baseURL}/images/${res.photo}`},
+          {property: "og:site_name", content: t("fingerprint")},
+          {property: "og:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          // Twitter
+          {property: "twitter:card", content: "summary_large_image"},
+          {property: "twitter:url", content: `${baseURL}/blog/${res.slug}`},
+          {property: "twitter:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "twitter:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "twitter:type", content: "article"},
+          {property: "twitter:image", content: `${baseURL}/images/${res.slug}`},
+          {property: "twitter:site", content: t("fingerprint")},
+          {property: "twitter:site_name", content: t("fingerprint")},
+          {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+        ],
+        
+      });
+    });
+}
 </script>
