@@ -22,7 +22,7 @@
               {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
               <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
             </div>
-            <h2 class="font-bold text-fpOrange text-xl lg:text-4xl sm:my-4 lg:mb-6" v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"></h2>
+            <h1 class="font-bold text-fpOrange text-xl lg:text-4xl sm:my-4 lg:mb-6" v-text="currentLocale == 'ar' ? post.name_ar : post.name_en"></h1>
             <div class="dark:text-gray-300">
               <p class="text-gray-600 font-medium text-md lg:text-xl" v-html="currentLocale == 'ar' ? post.body_ar : post.body_en"></p>
             </div>
