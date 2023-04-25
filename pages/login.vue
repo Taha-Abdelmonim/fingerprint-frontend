@@ -211,7 +211,7 @@ onMounted(() => {
     }
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=517999570183481&autoLogAppEvents=1";
+    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=1229977241051676&autoLogAppEvents=1";
     fjs.parentNode.insertBefore(js, fjs);
   })(document, "script", "facebook-jssdk");
   window.checkLoginState = function () {
@@ -228,7 +228,7 @@ onMounted(() => {
 
   window.fbAsyncInit = function () {
     FB.init({
-      appId: "517999570183481",
+      appId: "1229977241051676",
       cookie: true,
       xfbml: true,
       version: "v15.0",
