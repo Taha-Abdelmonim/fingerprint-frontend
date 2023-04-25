@@ -17,7 +17,7 @@
                 class="text-xl font-bold mt-6 block hover:text-fpBlueDark dark:text-fpOrange dark:hover:text-fpBlue"
                 v-text="currentLocale == 'ar' ? project.name_ar : project.name_en"
               ></a>
-              <span class="block text-gray-600 mt-2 mb-4 dark:text-gray-300" v-html="currentLocale == 'ar' ? project.name_ar : project.name_en"></span>
+              <p class="block text-gray-600 mt-2 mb-4 dark:text-gray-300" v-html="currentLocale == 'ar' ? project.description_ar : project.description_en"></p>
             </div>
           </div>
           <div class="flex justify-between items-center px-6">
