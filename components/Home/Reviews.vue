@@ -5,7 +5,12 @@
         <SplideSlide class="" v-for="review in reviews" :key="review.id">
           <div class="shadow-xl py-8 rounded-lg md:mx-4 sm:mx-1 bg-gray-100 dark:bg-gray-800 flex flex-col h-full">
             <div>
-              <img v-if="review.user.photo" :src="`${baseURL}/images/${review.user.photo}`" alt="user photo" class="w-20 h-20 rounded-full block mx-auto object-cover" />
+              <img
+                v-if="review.user.photo"
+                :src="review.user.oauth_type == null ? `${baseURL}/images/${review.user.photo}` : `${review.user.photo}`"
+                alt="user photo"
+                class="w-20 h-20 rounded-full block mx-auto object-cover"
+              />
               <img v-else src="~/assets/images/global/avatar.jpg" alt="user photo" class="w-20 h-20 rounded-full block mx-auto object-cover" />
             </div>
             <div class="px-6 h-full">
