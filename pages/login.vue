@@ -183,7 +183,7 @@ const returnDataGoogle = credential => {
   });
   res.then(res => {
     console.log(res);
-    user.id = res.exp;
+    user.id = res.sub;
     user.oauth_type = "google";
     user.name = res.name;
     user.email = res.email;
