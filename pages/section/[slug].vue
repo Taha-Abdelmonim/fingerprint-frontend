@@ -5,8 +5,8 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-20">
         <div v-for="project in projects" :key="project.id" class="shadow-xl pb-10 bg-white dark:bg-gray-800 flex flex-col h-full rounded-3xl overflow-hidden">
           <a :href="route.params.slug == 'video' ? `${baseURL}/images/${project.video}` : project.url" target="_blank" class="h-72">
-            <img v-if="project.photo" :src="`${baseURL}/images/${project.photo}`" alt="" class="w-full h-full" />
-            <img v-else src="~/assets/images/home/hero.png" alt="" class="w-full h-full" />
+            <img v-if="project.photo" :src="`${baseURL}/images/${project.photo}`" alt="project image" class="w-full h-full" />
+            <img v-else src="~/assets/images/home/hero.png" alt="project image" class="w-full h-full" />
           </a>
 
           <div class="px-6">

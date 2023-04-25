@@ -6,13 +6,13 @@
         <div>
           <Splide :options="options_hero" aria-label="My Favorite Images test" class="absolute inset-0 visible">
             <SplideSlide>
-              <img :src="globalStore.appSettings.hero_image_1" alt="Sample 1" class="object-cover h-full w-full" />
+              <img :src="globalStore.appSettings.hero_image_1" alt="image hero one" class="object-cover h-full w-full" />
             </SplideSlide>
             <SplideSlide>
-              <img :src="globalStore.appSettings.hero_image_2" alt="Sample 2" class="object-cover h-full w-full" />
+              <img :src="globalStore.appSettings.hero_image_2" alt="image hero two" class="object-cover h-full w-full" />
             </SplideSlide>
             <SplideSlide>
-              <img :src="globalStore.appSettings.hero_image_3" alt="Sample 2" class="object-cover h-full w-full" />
+              <img :src="globalStore.appSettings.hero_image_3" alt="image hero three" class="object-cover h-full w-full" />
             </SplideSlide>
           </Splide>
         </div>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="lg:w-1/2">
-          <img src="~/assets/images/home/hero_web.png" alt="" />
+          <img src="~/assets/images/home/hero_web.png" alt="hero web" />
         </div>
       </div>
     </section>
@@ -50,47 +50,47 @@
         <p class="text-3xl font-medium text-fpBlueDark dark:text-fpOrange text-center mt-10">{{ $t("to_client_text") }}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_social.svg" alt="" />
+            <img src="~/assets/images/home/image_service_social.svg" alt="image service social" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 whitespace-nowrap">{{ $t("service_social") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_social") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_web.svg" alt="" />
+            <img src="~/assets/images/home/image_service_web.svg" alt="image service web" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_web") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_web") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_video.svg" alt="" />
+            <img src="~/assets/images/home/image_service_video.svg" alt="image service video" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_video") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_video") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_seo.svg" alt="" />
+            <img src="~/assets/images/home/image_service_seo.svg" alt="image service seo" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_ads") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_ads") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_video_motion.svg" alt="" />
+            <img src="~/assets/images/home/image_service_video_motion.svg" alt="image service motion" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 whitespace-nowrap">{{ $t("service_motion") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_video_motion") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_design_photos.svg" alt="" />
+            <img src="~/assets/images/home/image_service_design_photos.svg" alt="image service photos" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_design_photos") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_design_photos") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_seo.svg" alt="" />
+            <img src="~/assets/images/home/image_service_seo.svg" alt="image service seo" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_seo") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_seo") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_puctur_product.svg" alt="" />
+            <img src="~/assets/images/home/image_puctur_product.svg" alt="image service product" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("puctur_product") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_speak") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_clients_manege.svg" alt="" />
+            <img src="~/assets/images/home/image_clients_manege.svg" alt="image service social manege" />
             <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("clients_manege") }}</b>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_speak") }}</p>
           </div>
@@ -130,16 +130,16 @@
           <img src="~/assets/images/home/antikiano.png" alt="Sample 1" class="object-cover rounded-full w-[250px] h-[250px] mx-auto shadow-lg" />
         </SplideSlide> -->
             <SplideSlide>
-              <img src="~/assets/images/home/antikiano.jpg" alt="Sample 1" class="mx-auto" />
+              <img src="~/assets/images/home/antikiano.jpg" alt="antikiano" class="mx-auto" />
             </SplideSlide>
             <SplideSlide>
-              <img src="~/assets/images/home/qias.png" alt="Sample 2" class="mx-auto" />
+              <img src="~/assets/images/home/qias.png" alt="qias" class="mx-auto" />
             </SplideSlide>
             <SplideSlide>
-              <img src="~/assets/images/home/futur.png" alt="Sample 2" class="mx-auto" />
+              <img src="~/assets/images/home/futur.png" alt="futur" class="mx-auto" />
             </SplideSlide>
             <SplideSlide>
-              <img src="~/assets/images/home/sidra.png" alt="Sample 2" class="mx-auto" />
+              <img src="~/assets/images/home/sidra.png" alt="sidra" class="mx-auto" />
             </SplideSlide>
           </Splide>
         </ClientOnly>
@@ -167,7 +167,6 @@ const {t} = useI18n();
 useHead({
   title: t("home"),
   meta: [{name: "title", content: t("home")}],
-  
 });
 const {currentLocale, dir} = useLang();
 const options_hero = {

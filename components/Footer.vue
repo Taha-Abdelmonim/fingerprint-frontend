@@ -14,7 +14,7 @@
       </div>
     </section>
     <footer class="bg-header py-10 relative">
-      <img src="~/assets/images/global/logo_footer.png" alt="" class="absolute end-0 top-5 w-3/12 hidden lg:block" />
+      <img src="~/assets/images/global/logo_footer.png" alt="logo footer" class="absolute end-0 top-5 w-3/12 hidden lg:block" />
       <div class="container mx-auto flex flex-col lg:flex-row items-center gap-x-10">
         <div class="lg:w-1/4">
           <div class="flex items-center gap-x-2">
@@ -23,7 +23,7 @@
               <p class="text-white text-xs mt-4 whitespace-nowrap">Digital Marketing & Website design</p>
             </div>
             <div class="">
-              <img src="~/assets/images/global/logo-transparent.png" alt="" class="" />
+              <img src="~/assets/images/global/logo-transparent.png" alt="background footer" class="" />
             </div>
           </div>
           <p class="text-white text-justify">{{ $t("description_site_2") }}</p>

@@ -99,7 +99,7 @@
                     :to="localePath({path: `/blog/${notification.data.post.slug}`, query: {read: true}})"
                     class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2"
                   >
-                    <img :src="`${baseURL}/images/${notification.data.post.photo}`" alt="" class="w-12 h-12 rounded-full object-cover" />
+                    <img :src="`${baseURL}/images/${notification.data.post.photo}`" alt="post photo" class="w-12 h-12 rounded-full object-cover" />
                     <span class="flex flex-col text-start ms-2">
                       <span class="text-xl dark:text-fpLightBack" v-text="locale == 'ar' ? notification.data.post.name_ar : notification.data.post.name_en"></span>
                       <span class="mt-1 dark:text-gray-300"

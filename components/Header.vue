@@ -5,13 +5,13 @@
       target="_blank"
       class="sm:hidden rounded-full p-2 fixed justify-center items-center end-8 bottom-4 z-51 transition-all duration-300 border-none flex"
     >
-      <img src="~/assets/images/global/whatsapp.png" alt="" class="w-16" />
+      <img src="~/assets/images/global/whatsapp.png" alt="whatsapp" class="w-16" />
     </a>
     <span id="bar-scroll" class="absolute start-0 h-1 bg-fpOrange rounded-e-full"></span>
     <div class="container flex items-center mx-auto">
       <div class="w-full lg:w-1/6 flex justify-between items-center gap-x-2">
         <nuxt-link :to="localePath('/')">
-          <img src="~/assets/images/global/logo-transparent.png" alt="" class="w-16 lg:w-20" />
+          <img src="~/assets/images/global/logo-transparent.png" alt="logo transparent" class="w-16 lg:w-20" />
         </nuxt-link>
         <button type="button" class="outline-gray-300 block lg:hidden" @click="toggleMenu = !toggleMenu">
           <Icon class="text-white text-4xl font-bold" :name="locale == 'ar' ? 'heroicons-bars-3-bottom-left-20-solid' : 'heroicons-bars-3-bottom-right'" />
@@ -25,7 +25,7 @@
               <button type="button" class="outline-gray-100 outline rounded-md" @click="toggleMenu = !toggleMenu">
                 <Icon name="ic-round-close" class="text-4xl font-bold" />
               </button>
-              <img src="~/assets/images/global/logo.png" alt="" class="w-20" />
+              <img src="~/assets/images/global/logo.png" alt="logo" class="w-20" />
             </div>
           </div>
           <ul class="flex flex-col lg:flex-row lg:items-center sm:divide-y dark:divide-gray-700 sm:mt-6 sm:h-full">
@@ -220,7 +220,6 @@
           <!--  ?read=true -->
           <transition name="menu-down" v-show="hoverNotification" v-if="Object.keys(globalStore.notifications).length > 0">
             <div
-              
               style="display: none"
               class="bg-gray-50 dark:text-gray-300 dark:bg-gray-800 absolute top-10 start-0 w-72 rounded-lg shadow-xl dark:border-t dark:border-t-fpOrange"
             >
@@ -234,7 +233,7 @@
                     :to="localePath({path: `/blog/${notification.data.post.slug}`, query: {read: true}})"
                     class="flex items-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-900 text-fpRed hover:text-fpBlue p-2"
                   >
-                    <img :src="`${baseURL}/images/${notification.data.post.photo}`" alt="" class="w-12 h-12 rounded-full object-cover" />
+                    <img :src="`${baseURL}/images/${notification.data.post.photo}`" alt="post image" class="w-12 h-12 rounded-full object-cover" />
                     <span class="flex flex-col text-start ms-2">
                       <span class="text-xl dark:text-fpLightBack" v-text="locale == 'ar' ? notification.data.post.name_ar : notification.data.post.name_en"></span>
                       <span class="mt-1 dark:text-gray-300"

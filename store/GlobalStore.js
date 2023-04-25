@@ -33,5 +33,8 @@ export const useGlobalStore = defineStore("global", {
       }
       return this.notifications;
     },
+    removeNotificationUser(idPost) {
+      this.notifications = this.notifications.filter(ele => ele.data.post.id != idPost);
+    },
   },
 });

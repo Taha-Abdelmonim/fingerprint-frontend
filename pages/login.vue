@@ -88,7 +88,7 @@
         </form>
       </div>
       <div class="lg:w-1/2 max-h-full">
-        <img src="~/assets/images/login_small.png" alt="Login" class="object-cover ms-auto" />
+        <img src="~/assets/images/login_small.png" alt="Login background" class="object-cover ms-auto" />
       </div>
     </div>
   </section>
@@ -96,6 +96,8 @@
 <script setup>
 import {useAuthStore} from "@/store/AuthStore";
 import {useTostStore} from "@/store/TostStore";
+import {useGlobalStore} from "@/store/GlobalStore";
+const globalStore = useGlobalStore();
 const {currentLocale, dir} = useLang();
 const errors = reactive(useErrors());
 let togglePassword = ref(false);
@@ -138,6 +140,7 @@ async function submitUserLogin() {
           type: "success",
           message: currentLocale.value == "ar" ? `مرحبًا بعودتك ${res.user.name}` : `Welcome back ${res.user.name}`,
         });
+        globalStore.notificationsUser();
         navigateTo("/");
       } else {
         if (res.errCode == 422) {

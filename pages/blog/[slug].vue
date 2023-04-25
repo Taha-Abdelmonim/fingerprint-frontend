@@ -9,7 +9,7 @@
         <div class="w-full sm:mt-20">
           <div class="">
             <div class="w-full mb-8 relative">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full h-[200px] lg:h-[400px]" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="post image" class="w-full h-[200px] lg:h-[400px]" />
               <span
                 class="absolute sm:top-[-3rem] lg:top-[-2rem] start-14 lg:start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg lg:rounded-md sm:w-28 sm:h-12 sm:right-12"
                 v-text="getDate(post.created_at)"
@@ -17,8 +17,13 @@
               </span>
             </div>
             <div class="text-gray-400 text-lg lg:text-xl mb-8">
-              <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
-              <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
+              <img
+                v-if="post.user.photo"
+                :src="`${baseURL}/images/${post.user.photo}`"
+                alt="user photo"
+                class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline"
+              />
+              <img v-else src="~/assets/images/global/avatar.jpg" alt="user photo" class="sm:mb-4 object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
               {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
               <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
             </div>
@@ -42,13 +47,13 @@
                 <img
                   v-if="comment.user.photo"
                   :src="`${baseURL}/images/${comment.user.photo}`"
-                  alt=""
+                  alt="user photo"
                   class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
                 />
                 <img
                   v-else
                   src="https://www.pngmart.com/files/22/User-Avatar-Profile-PNG-Isolated-Transparent-Picture.png"
-                  alt=""
+                  alt="user photo"
                   class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
                 />
 
@@ -105,10 +110,10 @@
   </article>
 </template>
 
-
 <script setup>
-
 import {useTostStore} from "@/store/TostStore";
+import {useGlobalStore} from "@/store/GlobalStore";
+const globalStore = useGlobalStore();
 const tost = useTostStore();
 const route = useRoute();
 const baseURL = useRuntimeConfig().public.baseURL;
@@ -125,44 +130,58 @@ let post = ref([]);
 const getPost = async () => {
   try {
     let read = "";
+    let headers = {};
     if (route.query.read == "true") {
       read = "?read=true";
+      headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user")}`,
+      };
     }
 
     await $fetch(`${useRuntimeConfig().public.apiURL}/post/${route.params.slug}${read}`, {
       method: "POST",
-      
+      headers,
     }).then(res => {
       post.value = res.data;
       res = res.data;
+      if (read != "") {
+        globalStore.removeNotificationUser(post.value.id);
+      }
       useHead({
         title: currentLocale.value == "ar" ? res.name_ar : res.name_en,
-        script: [{ type: "text/javascript", src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform", async: "async"}],
+        script: [
+          {
+            type: "text/javascript",
+            src: "https://platform-api.sharethis.com/js/sharethis.js#property=644546f57ac381001a304474&product=sticky-share-buttons&source=platform",
+            async: "async",
+          },
+        ],
         meta: [
-          {name: "title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
-          {name: "description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
-          // facebook   
+          {name: "title", content: currentLocale.value == "ar" ? res.name_ar : res.name_en},
+          {name: "description", content: currentLocale.value == "ar" ? res.description_ar : res.description_en},
+          // facebook
           {property: "article:publisher", content: "https://www.facebook.com/fingerprintmedia1"},
           {property: "og:locale", content: currentLocale.value},
           {property: "og:type", content: "article"},
           {property: "og:url", content: `${baseURL}/blog/${res.slug}`},
-          {property: "og:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
-          {property: "og:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "og:title", content: currentLocale.value == "ar" ? res.name_ar : res.name_en},
+          {property: "og:description", content: currentLocale.value == "ar" ? res.description_ar : res.description_en},
           {property: "og:image", content: `${baseURL}/images/${res.photo}`},
           {property: "og:site_name", content: t("fingerprint")},
-          {property: "og:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "og:alt", content: currentLocale.value == "ar" ? res.name_ar : res.name_en},
           // Twitter
           {property: "twitter:card", content: "summary_large_image"},
           {property: "twitter:url", content: `${baseURL}/blog/${res.slug}`},
-          {property: "twitter:title", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
-          {property: "twitter:description", content: currentLocale.value == 'ar' ? res.description_ar : res.description_en},
+          {property: "twitter:title", content: currentLocale.value == "ar" ? res.name_ar : res.name_en},
+          {property: "twitter:description", content: currentLocale.value == "ar" ? res.description_ar : res.description_en},
           {property: "twitter:type", content: "article"},
           {property: "twitter:image", content: `${baseURL}/images/${res.slug}`},
           {property: "twitter:site", content: t("fingerprint")},
           {property: "twitter:site_name", content: t("fingerprint")},
-          {property: "twitter:alt", content: currentLocale.value == 'ar' ? res.name_ar : res.name_en},
+          {property: "twitter:alt", content: currentLocale.value == "ar" ? res.name_ar : res.name_en},
         ],
-        
       });
     });
   } catch (error) {
@@ -171,8 +190,8 @@ const getPost = async () => {
 };
 
 onNuxtReady(() => {
-  getPost()
-})
+  getPost();
+});
 /* onBeforeResolve(to, from, next) {
   console.log(to);
    let data = fetch(`https://backend.fingerprintm.com/api/post/${to.params.slug}`, {
@@ -185,7 +204,7 @@ onNuxtReady(() => {
       });
       next(true)
     });
-} */  
+} */
 
 function getDate(date) {
   var $created_at = new Date(date);
@@ -238,9 +257,7 @@ const commentPost = async () => {
   } catch (error) {
     console.log(error);
   }
-
 };
-
 </script>
 
 <style>

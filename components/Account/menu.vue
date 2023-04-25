@@ -7,14 +7,14 @@
         <img
           v-if="auth.user.photo"
           :src="auth.user.oauth_type == null ? `${baseURL}/images/${auth.user.photo}` : `${auth.user.photo}`"
-          alt=""
+          alt="user photo"
           id="photo-user"
           class="object-cover rounded-full shadow-xl outline outline-4 outline-offset-2 outline-gray-200 block mx-auto w-[100px] h-[100px]"
         />
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUS8TjFE3RRsUZV9JietSrxIY8xke14UuulctZGjudNedC9oVgaJhQK9AE2nM8IXSXvls&usqp=CAU"
           v-if="!auth.user.photo"
-          alt=""
+          alt="user photo"
           class="rounded-full shadow-xl outline outline-4 outline-offset-2 outline-gray-200 block mx-auto w-[100px] h-[100px]"
         />
       </div>

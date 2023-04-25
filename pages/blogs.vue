@@ -8,7 +8,7 @@
         <div v-for="post in posts.data" :key="post.id">
           <div class="w-full mb-8 relative">
             <NuxtLink :to="localePath(`/blog/${post.slug}`)">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full lg:h-[400px]" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="user photo" class="w-full lg:h-[400px]" />
             </NuxtLink>
             <span
               class="absolute sm:top-[-3rem] lg:top-[-2rem] start-14 lg:start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg lg:rounded-md sm:w-28 sm:h-12 sm:right-12"
@@ -18,8 +18,8 @@
           </div>
 
           <div class="text-gray-400 text-lg lg:text-xl mb-8">
-            <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
-            <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
+            <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" alt="user photo" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
+            <img v-else src="~/assets/images/global/avatar.jpg" alt="user photo" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" />
             {{ post.user.name }} &ThinSpace; | &ThinSpace; <Icon name="uil-comment-dots" class="text-3xl" />
             <span>{{ $t("comments") }} ({{ post.comment.length }})</span> &ThinSpace;
           </div>
@@ -95,7 +95,7 @@
           <!-- mostWatchedPosts -->
           <div class="flex items-center w-full p-2 py-4 hover:bg-gray-200 transition" v-for="post in mostWatchedPosts" :key="post.id">
             <NuxtLink :to="localePath(`/blog/${post.slug}`)" class="block me-4 w-[40%] h-full">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="me-6 object-cover" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="post photo" class="me-6 object-cover" />
             </NuxtLink>
             <div class="w-[60%]">
               <NuxtLink

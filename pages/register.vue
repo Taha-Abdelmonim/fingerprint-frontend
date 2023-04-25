@@ -98,7 +98,7 @@
       <div class="lg:w-1/2 max-h-full">
         <picture class="sm:hidden">
           <source media="(max-width: 1024px)" srcset="~/assets/images/login.png" class="object-cover" />
-          <img src="~/assets/images/login_small.png" alt="Login" class="object-cover h-[80vh] ms-auto" />
+          <img src="~/assets/images/login_small.png" alt="Login background" class="object-cover h-[80vh] ms-auto" />
         </picture>
       </div>
     </div>

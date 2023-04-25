@@ -5,7 +5,7 @@
         <SplideSlide class="pb-20 rounded-2xl overflow-hidden" v-for="post in posts" :key="post.id">
           <div class="shadow-xl pb-8 lg:my-10 rounded-lg md:mx-4 sm:mx-1 bg-white dark:bg-gray-800 flex flex-col h-full">
             <nuxt-link :to="localePath(`/blog/${post.slug}`)">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="" class="w-full h-[250px] object-cover rounded-t-2xl" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="post image" class="w-full h-[250px] object-cover rounded-t-2xl" />
             </nuxt-link>
             <div class="px-6 h-full">
               <div class="">
@@ -19,8 +19,8 @@
             </div>
             <div class="flex justify-between items-center px-6">
               <div class="flex items-center">
-                <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="" />
-                <img v-else src="~/assets/images/global/avatar.jpg" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="" />
+                <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="user photo" />
+                <img v-else src="~/assets/images/global/avatar.jpg" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="user photo" />
                 <p class="font-medium text-xl text-main_color_2 mr-2 dark:text-fpOrange">{{ $t("my_name") }}</p>
               </div>
               <div class="flex justify-between items-center">

@@ -3,8 +3,8 @@ export default defineNuxtConfig({
   ssr: true,
   runtimeConfig: {
     public: {
-      apiURL: 'https://backend.fingerprintm.com/api',
-      baseURL: 'https://backend.fingerprintm.com',
+      apiURL: 'http://127.0.0.1:8000/api',
+      baseURL: 'http://127.0.0.1:8000',
     },
   },
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/tailwindcss', 'nuxt-icon'],
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#ffffff" },
         { property: "og:title", hid: "og:title", content: "بصمة" },
         { property: "og:image", hid: "og:image", content: "https://backend.fingerprintm.com/images/bg-logo.png" },
-        { property: "fb:app_id", hid: "fb:app_id", content: "1229977241051676" },
+        { property: "fb:app_id", hid: "fb:app_id", content: "517999570183481" },
         { name: "google-signin-client_id", content: "309314815545-qi9o7jvgj7k5ok4kfonlcguauptadasg.apps.googleusercontent.com" },
       ],
       script: [

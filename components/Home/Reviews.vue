@@ -5,8 +5,8 @@
         <SplideSlide class="" v-for="review in reviews" :key="review.id">
           <div class="shadow-xl py-8 rounded-lg md:mx-4 sm:mx-1 bg-gray-100 dark:bg-gray-800 flex flex-col h-full">
             <div>
-              <img v-if="review.user.photo" :src="`${baseURL}/images/${review.user.photo}`" alt="" class="w-20 h-20 rounded-full block mx-auto object-cover" />
-              <img v-else src="~/assets/images/global/avatar.jpg" alt="" class="w-20 h-20 rounded-full block mx-auto object-cover" />
+              <img v-if="review.user.photo" :src="`${baseURL}/images/${review.user.photo}`" alt="user photo" class="w-20 h-20 rounded-full block mx-auto object-cover" />
+              <img v-else src="~/assets/images/global/avatar.jpg" alt="user photo" class="w-20 h-20 rounded-full block mx-auto object-cover" />
             </div>
             <div class="px-6 h-full">
               <h2 class="text-lg font-bold mt-6 block hover:text-main_color_hover_2 text-center dark:text-fpOrange" v-text="review.user.name"></h2>
