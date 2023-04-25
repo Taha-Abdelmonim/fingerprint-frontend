@@ -118,6 +118,13 @@ let login = reactive({
 });
 // taha@taha.com
 // 123456789
+let user = reactive({
+  id: "",
+  oauth_type: "",
+  name: "",
+  email: "",
+  photo: null,
+});
 
 async function submitUserLogin() {
   await useAsyncData("login", () =>
@@ -144,37 +151,58 @@ async function submitUserLogin() {
     })
   );
 }
+
+async function onResponceLoginSocial() {
+  await useAsyncData("socialLogin", () =>
+    $fetch(`${apiUrl}/socialLogin`, {
+      method: "POST",
+      body: {locale: currentLocale.value, ...user},
+    }).then(res => {
+      if (res.status) {
+        auth.setUser(res.user);
+        tost.add({
+          type: "success",
+          message: currentLocale.value == "ar" ? `مرحبًا بعودتك ${res.user.name}` : `Welcome back ${res.user.name}`,
+        });
+        navigateTo("/");
+      } else {
+        if (res.errCode == 422) {
+          errors.record({password: res.message});
+        }
+        tost.add({
+          type: "error",
+          message: res.message,
+        });
+      }
+    })
+  );
+}
 const returnDataGoogle = credential => {
   const res = fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`).then(res => {
     return res.json();
   });
   res.then(res => {
     console.log(res);
-    /* registerValue.name = res.name;
-    registerValue.email = res.email;
-    registerValue.image = res.picture;
-    registerValue.provider = "google";
-    registerValue.provider_user_id = res.exp;
-    onResponceLogin(); */
+    user.id = res.exp;
+    user.oauth_type = "google";
+    user.name = res.name;
+    user.email = res.email;
+    user.photo = res.picture;
+    onResponceLoginSocial();
   });
 };
 onMounted(() => {
   function handleCredentialResponse(response) {
     returnDataGoogle(response.credential);
-    // call your backend API here
-    // the token can be accessed as: response.credential
   }
   google.accounts.id.initialize({
     client_id: "309314815545-qi9o7jvgj7k5ok4kfonlcguauptadasg.apps.googleusercontent.com",
     callback: handleCredentialResponse, //method to run after user clicks the Google sign in button
   });
-  google.accounts.id.renderButton(
-    document.getElementById("googleButton"),
-    {theme: "outline", size: "large"} // customization attributes
-  );
+  google.accounts.id.renderButton(document.getElementById("googleButton"), {theme: "outline", size: "large"});
   //google.accounts.id.prompt(); // also display the One Tap dialog
 
-  // facebook
+  // ==================================== facebook ==================================================================
   (function (d, s, id) {
     var js,
       fjs = d.getElementsByTagName(s)[0];
@@ -219,7 +247,7 @@ onMounted(() => {
       registerValue.image = response.picture.data.url;
       registerValue.provider = "facebook";
       registerValue.provider_user_id = response.id;
-      onResponceLogin(response); */
+      onResponceLoginSocial(response); */
     });
     /* FB.api("/me", function (response) {
       }); */
