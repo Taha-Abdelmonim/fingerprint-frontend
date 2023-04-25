@@ -4,12 +4,12 @@
       <div class="container mx-auto flex justify-center items-center">
         <div class="bg-fpOrange dark:bg-gray-900 lg:rounded-3xl flex justify-between items-center py-4 lg:px-28 lg:py-6">
           <p class="text-fpBlueDark lg:text-4xl font-bold me-10 whitespace-nowrap">{{ $t("consultation") }}</p>
-          <button
-            type="button"
+          <nuxt-link
+            :to="localePath('/contact')"
             class="text-white text-sm lg:text-lg whitespace-nowrap bg-fpBlueDark hover:bg-fpBlue transition-colors focus:ring-4 focus:ring-fpBlue font-bold rounded-lg px-4 lg:px-8 py-3 lg:py-4 ms-auto block focus:outline-none"
           >
             {{ $t("contact_now") }}
-          </button>
+          </nuxt-link>
         </div>
       </div>
     </section>

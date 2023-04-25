@@ -210,7 +210,7 @@ onMounted(() => {
     }
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=1229977241051676&autoLogAppEvents=1";
+    js.src = "https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v15.0&appId=177495175205619&autoLogAppEvents=1";
     fjs.parentNode.insertBefore(js, fjs);
   })(document, "script", "facebook-jssdk");
   window.checkLoginState = function () {
@@ -227,7 +227,7 @@ onMounted(() => {
 
   window.fbAsyncInit = function () {
     FB.init({
-      appId: "1229977241051676",
+      appId: "177495175205619",
       cookie: true,
       xfbml: true,
       version: "v15.0",
@@ -236,7 +236,6 @@ onMounted(() => {
 
   function testAPI(resInfoUser) {
     FB.api(`/${resInfoUser.userID}?fields=id,name,email,picture&access_token=${resInfoUser.accessToken}`, function (response) {
-      console.log(response);
       user.id = response.id;
       user.oauth_type = "facebook";
       user.name = response.name;
