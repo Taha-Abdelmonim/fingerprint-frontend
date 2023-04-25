@@ -6,7 +6,7 @@
         <input type="file" hidden id="image" @change="e => getImage(e)" accept="image/*" />
         <img
           v-if="auth.user.photo"
-          :src="`${baseURL}/images/${auth.user.photo}`"
+          :src="auth.user.oauth_type == null ? `${baseURL}/images/${auth.user.photo}` : `${auth.user.photo}`"
           alt=""
           id="photo-user"
           class="object-cover rounded-full shadow-xl outline outline-4 outline-offset-2 outline-gray-200 block mx-auto w-[100px] h-[100px]"
