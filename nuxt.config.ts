@@ -41,9 +41,10 @@ export default defineNuxtConfig({
         { property: "og:title", hid: "og:title", content: "بصمة" },
         { property: "og:image", hid: "og:image", content: "https://backend.fingerprintm.com/images/bg-logo.png" },
         { property: "fb:app_id", hid: "fb:app_id", content: "1229977241051676" },
+        { name: "google-signin-client_id", content: "309314815545-qi9o7jvgj7k5ok4kfonlcguauptadasg.apps.googleusercontent.com" },
       ],
       script: [
-        { src: 'https://accounts.google.com/gsi/client' },
+        { src: 'https://apis.google.com/js/platform.js', async: true, defer: true },
       ]
     },
   },
