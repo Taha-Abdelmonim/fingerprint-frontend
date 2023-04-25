@@ -156,7 +156,7 @@ async function onResponceLoginSocial() {
   await useAsyncData("socialLogin", () =>
     $fetch(`${apiUrl}/socialLogin`, {
       method: "POST",
-      body: {"_token": "Unpx0EVnp9z6zfx8gUW19LPY4MfPUcTCdu9LjRN7", locale: currentLocale.value, ...user},
+      body: {locale: currentLocale.value, ...user},
     }).then(res => {
       if (res.status) {
         auth.setUser(res.user);
