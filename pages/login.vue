@@ -182,7 +182,6 @@ const returnDataGoogle = credential => {
     return res.json();
   });
   res.then(res => {
-    console.log(res);
     user.id = res.sub;
     user.oauth_type = "google";
     user.name = res.name;
@@ -233,21 +232,17 @@ onMounted(() => {
       xfbml: true,
       version: "v15.0",
     });
-
-    /* FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    }); */
   };
 
   function testAPI(resInfoUser) {
     FB.api(`/${resInfoUser.userID}?fields=id,name,email,picture&access_token=${resInfoUser.accessToken}`, function (response) {
       console.log(response);
-      /* registerValue.name = response.name;
-      registerValue.email = response.email;
-      registerValue.image = response.picture.data.url;
-      registerValue.provider = "facebook";
-      registerValue.provider_user_id = response.id;
-      onResponceLoginSocial(response); */
+      user.id = response.id;
+      user.oauth_type = "facebook";
+      user.name = response.name;
+      user.email = response.email;
+      user.photo = response.picture.data.url;
+      onResponceLoginSocial();
     });
     /* FB.api("/me", function (response) {
       }); */
