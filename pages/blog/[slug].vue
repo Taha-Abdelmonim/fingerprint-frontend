@@ -46,7 +46,7 @@
                 <!-- {{ comment }} -->
                 <img
                   v-if="comment.user.photo"
-                  :src="`${baseURL}/images/${comment.user.photo}`"
+                  :src="comment.user.oauth_type == null ? `${baseURL}/images/${comment.user.photo}` : `${comment.user.photo}`"
                   alt="user photo"
                   class="sm:mb-4 object-cover w-10 lg:w-20 h-10 lg:h-20 rounded-full inline lg:mx-auto"
                 />

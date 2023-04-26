@@ -19,7 +19,12 @@
             </div>
             <div class="flex justify-between items-center px-6">
               <div class="flex items-center">
-                <img v-if="post.user.photo" :src="`${baseURL}/images/${post.user.photo}`" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="user photo" />
+                <img
+                  v-if="post.user.photo"
+                  :src="post.user.oauth_type == null ? `${baseURL}/images/${post.user.photo}` : `${post.user.photo}`"
+                  class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline"
+                  alt="user photo"
+                />
                 <img v-else src="~/assets/images/global/avatar.jpg" class="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-full inline" alt="user photo" />
                 <p class="font-medium text-xl text-main_color_2 mr-2 dark:text-fpOrange">{{ $t("my_name") }}</p>
               </div>
