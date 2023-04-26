@@ -32,7 +32,7 @@
             <li class="py-3 lg:py-0">
               <nuxt-link
                 :to="localePath('/')"
-                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-md lg:px-3 flex lg:block items-center justify-between"
               >
                 {{ $t("home") }}
                 <Icon class="text-3xl lg:hidden" name="ic-baseline-house" />
@@ -41,7 +41,7 @@
             <li class="py-3 lg:py-0">
               <nuxt-link
                 :to="localePath('/about')"
-                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-md lg:px-3 flex lg:block items-center justify-between"
               >
                 {{ $t("about") }}
                 <Icon class="text-3xl lg:hidden" name="mdi-account-box-multiple-outline" />
@@ -51,7 +51,7 @@
             <li class="py-3 lg:py-0 hidden lg:block items-center justify-between">
               <button
                 type="button"
-                class="text-gray-700 lg:text-white dark:text-gray-300 hover:text-fpOrange font-medium lg:font-bold text-lg sm:ps-2 sm:pe-0 lg:px-3 relative sm:w-full"
+                class="text-gray-700 lg:text-white dark:text-gray-300 hover:text-fpOrange font-medium lg:font-bold text-md sm:ps-2 sm:pe-0 lg:px-3 relative sm:w-full"
                 @mouseenter="hoverServices = !hoverServices"
                 @mouseleave="hoverServices = false"
               >
@@ -106,7 +106,7 @@
             <li class="py-3 lg:py-0">
               <nuxt-link
                 :to="localePath('/review')"
-                class="reviews text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                class="reviews text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-md lg:px-3 flex lg:block items-center justify-between"
                 >{{ $t("reviews") }}
                 <Icon class="text-3xl lg:hidden" name="ph-users-three-bold" />
               </nuxt-link>
@@ -114,7 +114,7 @@
             <li class="py-3 lg:py-0">
               <nuxt-link
                 :to="localePath('/blogs')"
-                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-md lg:px-3 flex lg:block items-center justify-between"
                 :class="route.name.slice(0, 4) == 'blog' ? 'router-link-active' : ''"
               >
                 {{ $t("blog") }}
@@ -124,7 +124,7 @@
             <li class="py-3 lg:py-0">
               <nuxt-link
                 :to="localePath('/contact')"
-                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-lg lg:px-3 flex lg:block items-center justify-between"
+                class="text-gray-700 lg:text-white dark:text-gray-300 font-medium lg:font-bold text-md lg:px-3 flex lg:block items-center justify-between"
               >
                 {{ $t("contact") }}
                 <Icon class="text-3xl lg:hidden" name="ph-envelope-open-fill" />

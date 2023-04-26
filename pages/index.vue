@@ -119,16 +119,13 @@
         </div>
       </div>
     </section>
-    <section id="clintes">
+    <!-- <section id="clintes">
       <div class="container mx-auto pb-16 pt-20 lg:pt-36">
         <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-4 mb-16">
           {{ $t("success_partners") }}
         </h2>
         <ClientOnly>
           <Splide :options="options_partners" aria-label="My Favorite Images" class="">
-            <!-- <SplideSlide>
-          <img src="~/assets/images/home/antikiano.png" alt="Sample 1" class="object-cover rounded-full w-[250px] h-[250px] mx-auto shadow-lg" />
-        </SplideSlide> -->
             <SplideSlide>
               <img src="~/assets/images/home/antikiano.jpg" alt="antikiano" class="mx-auto" />
             </SplideSlide>
@@ -144,7 +141,7 @@
           </Splide>
         </ClientOnly>
       </div>
-    </section>
+    </section> -->
     <section>
       <div class="container mx-auto pt-10 lg:pt-16">
         <h2 class="text-3xl lg:text-5xl text-fpBlueDark dark:text-fpOrange font-bold border-b-2 border-fpOrange w-fit mx-auto pb-2 lg:pb-6 mb-4 lg:mb-16">{{ $t("blog") }}</h2>
