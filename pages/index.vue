@@ -20,7 +20,7 @@
       <div class="container mx-auto flex flex-col lg:flex-row justify-center items-center relative z-10 h-full">
         <div class="lg:w-1/2">
           <div class="flex flex-col justify-center">
-            <h1 class="text-3xl lg:text-5xl font-bold text-white text-reflect">{{ $t("develop") }}</h1>
+            <h1 class="text-3xl lg:text-5xl py-2 font-bold text-white text-reflect type-writer">{{ $t("develop") }}</h1>
             <p class="text-lg lg:text-2xl text-white font-medium mt-8 leading-10">{{ $t("description_site") }}</p>
           </div>
           <div class="flex items-center gap-x-2 lg:gap-x-10 w-full my-10 lg:mt-20">
@@ -51,69 +51,71 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_social.svg" alt="image service social" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 whitespace-nowrap">{{ $t("service_social") }}</b>
+            <nuxt-link :to="localePath('/section/ads')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 whitespace-nowrap font-bold">{{ $t("service_social") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_social") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_web.svg" alt="image service web" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_web") }}</b>
+            <nuxt-link :to="localePath('/section/web')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("service_web") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_web") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_video.svg" alt="image service video" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_video") }}</b>
+            <nuxt-link :to="localePath('/section/video')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("service_video") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_video") }}</p>
           </div>
-          <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
-            <img src="~/assets/images/home/image_service_seo.svg" alt="image service seo" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_ads") }}</b>
+          <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center lg:-mt-8">
+            <img src="~/assets/images/home/image_service_ads.svg" alt="image service ads" />
+            <nuxt-link :to="localePath('/section/ads')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("service_ads") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_ads") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_video_motion.svg" alt="image service motion" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 whitespace-nowrap">{{ $t("service_motion") }}</b>
+            <nuxt-link :to="localePath('/section/motion')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold whitespace-nowrap">{{
+              $t("service_motion")
+            }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_video_motion") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_design_photos.svg" alt="image service photos" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_design_photos") }}</b>
+            <nuxt-link :to="localePath('/section/social')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("service_design_photos") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_design_photos") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_service_seo.svg" alt="image service seo" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("service_seo") }}</b>
+            <nuxt-link :to="localePath('/section/seo')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("service_seo") }}</nuxt-link>
             <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_service_seo") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_puctur_product.svg" alt="image service product" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("puctur_product") }}</b>
-            <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_speak") }}</p>
+            <nuxt-link :to="localePath('/section/video')" class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("puctur_product") }}</nuxt-link>
+            <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_puctur_product") }}</p>
           </div>
           <div class="p-8 rounded-2xl flex flex-col justify-center items-center text-center">
             <img src="~/assets/images/home/image_clients_manege.svg" alt="image service social manege" />
-            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4">{{ $t("clients_manege") }}</b>
-            <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_speak") }}</p>
+            <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-4 font-bold">{{ $t("clients_manege") }}</b>
+            <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_clients_manege") }}</p>
           </div>
         </div>
       </div>
     </section>
-    <section class="bg-fpBlue dark:bg-gray-800 sm:pb-16 py-10">
+    <section class="bg-fpBlue dark:bg-gray-800 sm:pb-16 py-10" id="main-count-items">
       <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div class="text-center">
-            <b class="text-5xl text-white">49<span class="text-fpOrange text-6xl">+</span></b>
+            <b class="text-5xl text-white"><span data-number="49" class="count-number">0</span><span class="text-fpOrange text-6xl">+</span></b>
             <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("site_count") }}</p>
           </div>
           <div class="text-center sm:mt-16">
-            <b class="text-5xl text-white">146<span class="text-fpOrange text-6xl">+</span></b>
+            <b class="text-5xl text-white"><span data-number="146" class="count-number">0</span><span class="text-fpOrange text-6xl">+</span></b>
             <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("big_ads") }}</p>
           </div>
           <div class="text-center sm:mt-16">
-            <b class="text-5xl text-white">6<span class="text-fpOrange text-6xl">+</span></b>
+            <b class="text-5xl text-white"><span data-number="10" class="count-number">0</span><span class="text-fpOrange text-6xl">+</span></b>
             <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("years_experiance") }}</p>
           </div>
           <div class="text-center sm:mt-16">
-            <b class="text-5xl text-white">34<span class="text-fpOrange text-6xl">+</span></b>
+            <b class="text-5xl text-white"><span data-number="34" class="count-number">0</span><span class="text-fpOrange text-6xl">+</span></b>
             <p class="text-white ltr:text-4xl rtl:text-5xl sm:mt-2 lg:my-8 font-medium">{{ $t("client") }}</p>
           </div>
         </div>
@@ -175,7 +177,7 @@ const options_hero = {
   pagination: true,
   type: "loop",
   arrows: false,
-  interval: 3000,
+  interval: 4000,
   breakpoints: {
     768: {
       arrows: false,
@@ -193,7 +195,7 @@ const options_partners = {
   pagination: true,
   type: "loop",
   arrows: false,
-  interval: 3000,
+  interval: 4000,
   breakpoints: {
     768: {
       arrows: false,
@@ -205,6 +207,33 @@ const options_partners = {
     },
   },
 };
+const incressNumber = () => {
+  let nums = document.querySelectorAll(".count-number");
+  let section = document.getElementById("main-count-items");
+  let started = false; // Function Started ? No
+
+  window.onscroll = function () {
+    if (window.scrollY >= section.offsetTop - 700) {
+      if (!started) {
+        nums.forEach(num => startCount(num));
+      }
+      started = true;
+    }
+  };
+
+  function startCount(el) {
+    let number = el.dataset.number;
+    let count = setInterval(() => {
+      el.textContent++;
+      if (el.textContent == number) {
+        clearInterval(count);
+      }
+    }, 2000 / number);
+  }
+};
+if (process.client) {
+  incressNumber();
+}
 </script>
 
 <style>

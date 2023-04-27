@@ -43,7 +43,7 @@
             <img src="~/assets/images/home/after_servicec.svg" alt="after servicec" />
           </div>
           <b class="text-fpBlue dark:text-fpLightBack text-2xl mt-2">{{ $t("after_secvices") }}</b>
-          <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_speak") }}</p>
+          <p class="text-fpBlue dark:text-gray-300 text-md mt-2 font-medium">{{ $t("desc_secvices") }}</p>
         </div>
       </div>
     </div>

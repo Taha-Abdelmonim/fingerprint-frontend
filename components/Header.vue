@@ -65,7 +65,7 @@
                 <transition name="menu-down" v-show="hoverServices">
                   <div
                     style="display: none"
-                    class="lg:absolute start-0 top-8 bg-white dark:text-gray-300 dark:bg-gray-800 text-gray-800 px-2 py-2 lg:w-52 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
+                    class="lg:absolute start-0 top-8 bg-white dark:text-gray-300 dark:bg-gray-800 text-gray-800 px-2 py-2 lg:w-64 text-sm font-medium rounded-md lg:after:content-[''] lg:after:absolute after:top-0 after:start-0 after:w-full after:h-1 after:bg-fpOrange after:rounded-t-md"
                   >
                     <ul class="divide-y dark:divide-gray-700">
                       <li
@@ -74,7 +74,7 @@
                         @click="hoverServices = false"
                         class="relative py-3 sm:ps-6 text-start sm:before:content-[''] sm:before:absolute before:top-3.5 before:start-0 before:bg-gray-300 before:w-2 before:h-2 before:rounded-full"
                       >
-                        <nuxt-link :to="localePath(`/${section.url}`)" class="block w-full h-full" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
+                        <nuxt-link :to="localePath(`/${section.url}`)" class="block w-full h-full font-medium text-lg" v-text="currentLocale == 'ar' ? section.name_ar : section.name_en"></nuxt-link>
                       </li>
                     </ul>
                   </div>

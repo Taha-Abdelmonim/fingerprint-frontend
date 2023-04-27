@@ -3,10 +3,10 @@
     <BreadCrumbs :classes="'bg-breadcrumb h-28 lg:h-[500px] text-white'" :contents="['سياسة الخصوصية']" />
     <div class="container mx-auto bg-gray-100 dark:bg-gray-900 my-box-shadow pt-24 pb-40">
       <h1 class="text-center text-4xl font-bold dark:text-fpOrange border-b-2 w-fit mx-auto">{{ $t("privacy_policy") }}</h1>
-      <h3 class="my-6 text-2xl dark:text-fpLightBack">تم آخر تحديث لسياسة الخصوصية هذه في 26 يناير 2023.</h3>
+      <h3 class="my-6 text-2xl dark:text-fpLightBack">تم آخر تحديث لسياسة الخصوصية هذه في 26 أبريل 2023.</h3>
       <div class="space-y-5">
         <p class="leading-6 text-gray-700 dark:text-gray-300 text-md">
-          يجب أن تحمل جميع المصطلحات المكتوبة بحروف كبيرة المستخدمة وغير المحددة بطريقة أخرى هنا المعنى المنسوب لها في شروط استخدام https:/antikiano.com
+          يجب أن تحمل جميع المصطلحات المكتوبة بحروف كبيرة المستخدمة وغير المحددة بطريقة أخرى هنا المعنى المنسوب لها في شروط استخدام https://www.fingerprintm.com/
         </p>
         <p class="leading-6 text-gray-700 dark:text-gray-300 text-md">
           يتم توفير أي نسخة من سياسة الخصوصية هذه بأي لغة أخرى غير العربيه للراحة ، ويجب أن تفهم وتوافق على أن اللغة العربيه يجب أن تسود ، في حالة حدوث أي تعارض.

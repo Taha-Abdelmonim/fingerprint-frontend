@@ -11,7 +11,7 @@
             type="button"
             class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-fpLightBack hover:bg-gray-200 dark:hover:bg-gray-800"
           >
-            <span>كم تكليفة الموقع؟</span>
+            <span>كم تكلفة الموقع؟</span>
             <Icon name="zondicons-cheveron-down" class="text-2xl transition-all duration-300" :class="openqution_1 ? 'rotate-180' : ''" />
           </button>
         </h2>
