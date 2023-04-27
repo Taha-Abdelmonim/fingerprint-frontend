@@ -109,11 +109,9 @@ nav a.router-link-active {
 }
 
 .type-writer {
-  width: 780px; /* You Can Use 28ch */
   border-right: 2px solid var(--main-color);
   overflow: hidden;
   white-space: nowrap;
-  animation: control-width 5s steps(80) 0s infinite, blink 0.5s infinite;
 }
 @keyframes control-width {
   from {
@@ -131,10 +129,20 @@ nav a.router-link-active {
     border-right-color: transparent;
   }
 }
-
-
+@keyframes control-width-2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 350px;
+  }
+}
 
 @media (min-width: 1025px) {
+  .type-writer {
+    width: 780px; /* You Can Use 28ch */
+    animation: control-width 5s steps(80) 0s infinite, blink 0.5s infinite;
+  }
   .splide__arrow--prev {
     background-image: url("~/assets/images/global/arrow_right.png");
     background-size: cover;
@@ -147,6 +155,10 @@ nav a.router-link-active {
   }
 }
 @media (max-width: 1024px) {
+  .type-writer {
+    width: 350px;
+    animation: control-width-2 5s steps(80) 0s infinite, blink 0.5s infinite;
+  }
   .bg-hero {
     /* background-size: 100% !important; */
   }
