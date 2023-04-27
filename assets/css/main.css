@@ -134,7 +134,7 @@ nav a.router-link-active {
     width: 0;
   }
   to {
-    width: 350px;
+    width: 340px;
   }
 }
 
@@ -156,7 +156,7 @@ nav a.router-link-active {
 }
 @media (max-width: 1024px) {
   .type-writer {
-    width: 350px;
+    width: 340px;
     animation: control-width-2 5s steps(80) 0s infinite, blink 0.5s infinite;
   }
   .bg-hero {
