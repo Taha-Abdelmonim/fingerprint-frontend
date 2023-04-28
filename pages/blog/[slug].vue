@@ -9,7 +9,7 @@
         <div class="w-full sm:mt-20">
           <div class="">
             <div class="w-full mb-8 relative">
-              <img :src="`${baseURL}/images/${post.photo}`" alt="post image" class="w-full h-[200px] lg:h-[400px]" />
+              <img :src="`${baseURL}/images/${post.photo}`" alt="post image" class="w-full h-[200px] lg:h-[400px] object-cover" />
               <span
                 class="absolute sm:top-[-3rem] lg:top-[-2rem] start-14 lg:start-0 rtl:translate-x-[50%] ltr:-translate-x-[50%] bg-fpOrange w-28 h-20 grid place-items-center text-white text-lg lg:rounded-md sm:w-28 sm:h-12 sm:right-12"
                 v-text="getDate(post.created_at)"
