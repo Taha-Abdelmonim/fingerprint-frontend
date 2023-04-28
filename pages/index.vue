@@ -231,9 +231,9 @@ const incressNumber = () => {
     }, 2000 / number);
   }
 };
-if (process.client) {
+onMounted(() => {
   incressNumber();
-}
+});
 </script>
 
 <style>
